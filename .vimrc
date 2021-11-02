@@ -85,8 +85,8 @@ endfunction
 " auto-pairs
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
-" map leader key to space bar
-let mapleader = "<Space>"
+" map leader key to comma
+let mapleader = ","
 
 " word movement
 imap <S-Left> <Esc>bi
@@ -114,19 +114,23 @@ endfunction
 
 nnoremap <silent> <C-s> :call ToggleSpellCheck()<CR>
 
+" commenting key bindings
+let g:NERDCreateDefaultMappings=1
+" let g:NERDSpaceDelims = 1
+nmap <C-_> <plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle
+
+" comment from current" position to end of line 
+nmap <C-?> <Plug>NERDCommenterToEOL 
+" adds a comment at the end of the line
+nmap <leader>cA <Plug>NERDCommenterAppend
+
 " move between tabs with CTRL - l/h
 nnoremap <silent><C-h> :tabprevious<CR>
 nnoremap <silent><C-l> :tabnext<CR>
 
 " remove last searched terms with \:
 noremap <silent>\ :let @/ = ""<CR>
-
-" commenting key bindings
-nmap <C-_> <leader>c<space> " toogle comments with ctrl /
-vmap <C-_> <leader>c<space>
-
-nmap <C-?> <leader>c$ " comment from current position to end of line 
-vmap <C-?> <leader>c$
 
 " mouse
 set mouse=a
@@ -152,7 +156,7 @@ let g:nord_cursor_line_number_background = 1
 filetype on
 filetype plugin indent on
 
-" lightline
+ "lightline
 set noshowmode
 let g:lightline = { 'colorscheme': 'onedark',
 \ }
