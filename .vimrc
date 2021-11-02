@@ -116,12 +116,13 @@ nnoremap <silent> <C-s> :call ToggleSpellCheck()<CR>
 
 " commenting key bindings
 let g:NERDCreateDefaultMappings=1
-" let g:NERDSpaceDelims = 1
+let g:NERDSpaceDelims = 1
 nmap <C-_> <plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle
 
 " comment from current" position to end of line 
 nmap <C-?> <Plug>NERDCommenterToEOL 
+
 " adds a comment at the end of the line
 nmap <leader>cA <Plug>NERDCommenterAppend
 
@@ -150,15 +151,20 @@ endfunction
 
 " color scheme
 syntax on
-colorscheme onedark
-"colorscheme nord
+"colorscheme onedark
+colorscheme nord
 let g:nord_cursor_line_number_background = 1
 filetype on
 filetype plugin indent on
 
  "lightline
 set noshowmode
-let g:lightline = { 'colorscheme': 'onedark',
+"let g:lightline = { 'colorscheme': 'onedark',
+"\ }
+
+let g:lightline = { 'colorscheme': 'nord',
+\ 'separator': { 'left': '', 'right': '' },
+\ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
 " code folding

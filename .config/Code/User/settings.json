@@ -5,7 +5,6 @@
     "workbench.startupEditor": "none",
     "editor.tabCompletion": "on",
     "security.workspace.trust.untrustedFiles": "open",
-    "workbench.colorTheme": "Yaru Dark",
     "window.zoomLevel": 1,
     "vim.normalModeKeyBindings": [
         {
@@ -38,5 +37,6 @@
     "editor.snippetSuggestions": "bottom",
     "codetogether.userName": "p.videgain.barranco",
     "typescript.suggest.includeCompletionsWithSnippetText": false,
-    "editor.cursorSurroundingLines": 999
+    "editor.cursorSurroundingLines": 999,
+    "workbench.colorTheme": "Nord"
 }
