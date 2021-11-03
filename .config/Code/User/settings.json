@@ -8,7 +8,7 @@
     "window.zoomLevel": 1,
     "vim.normalModeKeyBindings": [
         {
-            "before": ["<space>"],
+            "before": ["<space><space>"],
             "after": ["z", "a"]
         },
         {

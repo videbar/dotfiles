@@ -86,7 +86,7 @@ endfunction
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
 " map leader key to comma
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " word movement
 imap <S-Left> <Esc>bi
@@ -124,7 +124,7 @@ vmap <C-_> <Plug>NERDCommenterToggle
 nmap <C-?> <Plug>NERDCommenterToEOL 
 
 " adds a comment at the end of the line
-nmap <leader>cA <Plug>NERDCommenterAppend
+nmap <leader>A <Plug>NERDCommenterAppend
 
 " move between tabs with CTRL - l/h
 nnoremap <silent><C-h> :tabprevious<CR>
@@ -170,7 +170,7 @@ let g:lightline = { 'colorscheme': 'nord',
 " code folding
 set foldmethod=indent
 set foldlevel=99
-nnoremap <space> za
+nnoremap <leader><leader> za
 
  "wrap toggle
 setlocal nowrap
