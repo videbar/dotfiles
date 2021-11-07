@@ -24,6 +24,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 filetype plugin indent on
@@ -162,9 +163,19 @@ set noshowmode
 "let g:lightline = { 'colorscheme': 'onedark',
 "\ }
 
-let g:lightline = { 'colorscheme': 'nord',
-\ 'separator': { 'left': '', 'right': '' },
-\ 'subseparator': { 'left': '', 'right': '' }
+let g:lightline = { 
+    \ 'colorscheme': 'nord',
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' },
+    \ 'active': {
+        \ 'left': [ 
+            \ [ 'mode', 'paste'  ],
+            \ [ 'gitbranch', 'readonly', 'filename', 'modified'  ]
+        \ ]
+    \ },
+    \ 'component_function': {
+        \ 'gitbranch': 'FugitiveHead'
+    \ },
 \ }
 
 " code folding
