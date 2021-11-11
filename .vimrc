@@ -25,6 +25,7 @@ Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-fugitive'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 filetype plugin indent on
