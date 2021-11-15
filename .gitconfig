@@ -3,8 +3,6 @@
 	email = p.videgain.barranco@fz-juelich.de
 	name = Pedro Videgain Barranco
 # Please adapt and uncomment the following lines:
-#	name = Pedro Videgain Barranco
-#	email = p.videgain.barranco@ias9206.ias-9.lan
 [core]
 	editor = vim
 [alias]
