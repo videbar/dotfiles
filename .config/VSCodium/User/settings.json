@@ -38,5 +38,7 @@
     "codetogether.userName": "p.videgain.barranco",
     "typescript.suggest.includeCompletionsWithSnippetText": false,
     "editor.cursorSurroundingLines": 999,
-    "workbench.colorTheme": "Nord"
+    "workbench.colorTheme": "Nord",
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black"
 }
