@@ -1,10 +1,18 @@
-# This is Git's per-user configuration file.
+[init]
+	defaultBranch = main
+
 [user]
-	email = p.videgain.barranco@fz-juelich.de
 	name = Pedro Videgain Barranco
-# Please adapt and uncomment the following lines:
+
+[includeIf "gitdir:/home/p.videgain.barranco/"]
+    path = ~/.work-gitconfig
+
+[includeIf "gitdir:/home/videbar/"]
+    path = ~/.play-gitconfig
+
 [core]
 	editor = vim
+
 [alias]
 	graph = log --oneline --graph --decorate
 	ac = commit -am
