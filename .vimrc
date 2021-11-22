@@ -96,13 +96,6 @@ nmap <S-Left> b
 imap <S-Right> <Esc><Right>wi
 nmap <S-Right> w
 
-" Moving through parragraphs
-nnoremap <C-j> }
-vmap <C-j> }
-
-nmap <C-k> {
-vmap <C-k> {
-
 " toggle spell check with Ctrl-s: https://gist.github.com/brandonpittman/9d15134057c7267a88a8
 function! ToggleSpellCheck()
   if &spell

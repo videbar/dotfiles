@@ -8,29 +8,14 @@
     "window.zoomLevel": 1,
     "vim.normalModeKeyBindings": [
         {
-            "before": ["<space><space>"],
-            "after": ["z", "a"]
+            "before": [
+                "<space><space>"
+            ],
+            "after": [
+                "z",
+                "a"
+            ]
         },
-        {
-            "before": ["<C-j>"],
-            "after": ["}"]
-        },
-        {
-            "before": ["<C-k>"],
-            "after": ["{"]
-        },
-        
-    ],
-    "vim.visualModeKeyBindings": [
-        {
-            "before": ["<C-j>"],
-            "after": ["}"]
-        },
-        {
-            "before": ["<C-k>"],
-            "after": ["{"]
-        },
-        
     ],
     "vim.foldfix": true,
     "editor.fontSize": 13,
@@ -40,5 +25,8 @@
     "editor.cursorSurroundingLines": 999,
     "workbench.colorTheme": "Nord",
     "editor.formatOnSave": true,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "editor.rulers": [
+        88,
+    ],
 }
