@@ -20,7 +20,6 @@
     "vim.foldfix": true,
     "editor.fontSize": 13,
     "editor.snippetSuggestions": "bottom",
-    "codetogether.userName": "p.videgain.barranco",
     "typescript.suggest.includeCompletionsWithSnippetText": false,
     "editor.cursorSurroundingLines": 999,
     "workbench.colorTheme": "Nord",
