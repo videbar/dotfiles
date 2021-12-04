@@ -90,7 +90,7 @@ fi
 
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
-    alias cat='bat -pp --theme="Nord"'
+    alias cat='bat --theme="Nord"'
 fi
 
 # Use z for navigation
