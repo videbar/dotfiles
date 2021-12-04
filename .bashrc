@@ -64,6 +64,9 @@ complete -o default -F _pip_completion pip
 
 # Dotfiles configuration
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# Tabcomplete for dotfiles
+[ -f /usr/share/bash-completion/completions/git  ] && . /usr/share/bash-completion/completions/git
+__git_complete dotfiles __git_main
 
 # Starship
 if [ "$(command -v starship)" ]; then
