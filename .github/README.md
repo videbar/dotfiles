@@ -30,9 +30,9 @@ To apply the configuration to a new system do the following:
     ```
     alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
     ```
-    and change the repository configuration (This makes sure that the untracked
-    file in your home directory are not showed when calling `dotfiles status`
-    and similar commands.):
+    and change the repository configuration (this makes sure that the untracked
+    files in your home directory are not showed when calling `dotfiles status`
+    and similar commands):
     ```
     dotfiles config --local status.showUntrackedFiles no
     ```

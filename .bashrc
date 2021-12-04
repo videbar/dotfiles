@@ -48,7 +48,7 @@ function virtualenv_info(){
 }
 
 # Poetry:
-export PATH="/home/videbar/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Enable pip autocompletion
 _pip_completion()
@@ -63,7 +63,7 @@ complete -o default -F _pip_completion pip
 . "$HOME/.cargo/env"
 
 # Dotfiles configuration
-alias dotfiles='/usr/bin/git --git-dir=/home/videbar/.dotfiles/ --work-tree=/home/videbar'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Starship
 if [ "$(command -v starship)" ]; then
