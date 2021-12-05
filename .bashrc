@@ -22,7 +22,6 @@ HISTFILESIZE=3000
 # User specific aliases and functions
 alias python='python3'
 alias eng='LANG=en_US.UTF-8 bash'
-alias la='ls -a'
 alias h='history | grep'
 alias f='find . -name'
 
@@ -83,12 +82,11 @@ fi
 
 # Use exa instead of ls
 if [ "$(command -v exa)" ]; then
-    unalias 'll'
-    unalias 'la'
-    unalias 'ls'
     alias ls='exa -G  --color auto -s type'
     alias la='exa -a -G  --color auto -s type'
     alias ll='exa -l --color always -s type'
+else
+    alias la='ls -a'
 fi
 
 # Use bat instead of cat
