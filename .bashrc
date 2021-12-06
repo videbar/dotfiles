@@ -29,6 +29,8 @@ alias f='find . -name'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Virtualenvwrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source ~/.local/bin/virtualenvwrapper.sh
@@ -87,6 +89,7 @@ if [ "$(command -v exa)" ]; then
     alias ll='exa -l --color always -s type'
 else
     alias la='ls -a'
+    alias ll='ls -l'
 fi
 
 # Use bat instead of cat

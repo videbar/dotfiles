@@ -5,7 +5,6 @@
     "workbench.startupEditor": "none",
     "editor.tabCompletion": "on",
     "security.workspace.trust.untrustedFiles": "open",
-    "window.zoomLevel": 1,
     "vim.normalModeKeyBindings": [
         {
             "before": [
@@ -28,4 +27,5 @@
     "editor.rulers": [
         88,
     ],
+    "window.zoomLevel": 1,
 }
