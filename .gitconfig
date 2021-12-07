@@ -18,6 +18,7 @@
 	graph = log --oneline --graph --decorate
 	ac = commit -am
 	slog = log --oneline -n 5
+	last = log -n 1
 
 [interactive]
 	diffFilter = delta --color-only
