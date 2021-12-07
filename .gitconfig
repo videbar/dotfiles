@@ -4,11 +4,11 @@
 [user]
 	name = Pedro Videgain Barranco
 
-[includeIf "gitdir/i:/home/p.videgain.barranco/"]
-	path = .work-gitconfig
+[includeIf "gitdir/i:home/p.videgain.barranco/**"]
+	path = ~/.work-gitconfig
 
-[includeIf "gitdir/i:/home/videbar/"]
-	path = .play-gitconfig
+[includeIf "gitdir/i:home/videbar/**"]
+	path = ~/.play-gitconfig
 
 [core]
 	editor = vim
