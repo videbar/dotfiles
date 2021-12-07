@@ -5,14 +5,14 @@
 	name = Pedro Videgain Barranco
 
 [includeIf "gitdir/i:/home/p.videgain.barranco/"]
-    path = .work-gitconfig
+	path = .work-gitconfig
 
 [includeIf "gitdir/i:/home/videbar/"]
-    path = .play-gitconfig
+	path = .play-gitconfig
 
 [core]
 	editor = vim
-    pager = delta
+	pager = delta
 
 [alias]
 	graph = log --oneline --graph --decorate
@@ -20,9 +20,10 @@
 	slog = log --oneline -n 5
 
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
+
 [delta]
-    side-by-side = true
-    line-numbers-left-format = ""
-    line-numbers-right-format = "│ "
-    syntax-theme = Nord
+	side-by-side = true
+	line-numbers-left-format = ""
+	line-numbers-right-format = "│ "
+	syntax-theme = Nord
