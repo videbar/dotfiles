@@ -5,10 +5,10 @@
 	name = Pedro Videgain Barranco
 
 [includeIf "gitdir/i:/home/p.videgain.barranco/"]
-    path = ~/.work-gitconfig
+    path = .work-gitconfig
 
 [includeIf "gitdir/i:/home/videbar/"]
-    path = ~/.play-gitconfig
+    path = .play-gitconfig
 
 [core]
 	editor = vim

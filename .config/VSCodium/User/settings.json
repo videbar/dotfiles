@@ -28,4 +28,5 @@
         88,
     ],
     "window.zoomLevel": 1,
+    "extensions.ignoreRecommendations": true,
 }
