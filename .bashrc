@@ -88,8 +88,9 @@ if [ "$(command -v exa)" ]; then
     alias la='exa -a -G  --color auto -s type'
     alias ll='exa -l --color always -s type'
 else
-    alias la='ls -a'
-    alias ll='ls -l'
+    alias la='ls -a --color=auto'
+    alias ll='ls -l --color=auto'
+    alias ls='ls --color=auto'
 fi
 
 # Use bat instead of cat
