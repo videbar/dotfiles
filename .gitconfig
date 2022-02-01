@@ -12,19 +12,9 @@
 
 [core]
 	editor = vim
-	pager = delta
 
 [alias]
 	graph = log --oneline --graph --decorate
 	ac = commit -am
 	slog = log --oneline -n 5
 	last = log -n 1
-
-[interactive]
-	diffFilter = delta --color-only
-
-[delta]
-	side-by-side = true
-	line-numbers-left-format = ""
-	line-numbers-right-format = "│ "
-	syntax-theme = Nord
