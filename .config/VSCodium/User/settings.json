@@ -16,6 +16,7 @@
             ]
         },
     ],
+    "keyboard.dispatch": "keyCode",
     "vim.foldfix": true,
     "editor.fontSize": 13,
     "editor.snippetSuggestions": "bottom",
