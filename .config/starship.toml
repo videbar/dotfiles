@@ -1,44 +1,44 @@
- add_newline = false
- command_timeout = 4000
+add_newline = false
+command_timeout = 4000
 
- format = """
- $username\
- $hostname\
- $directory\
- $git_branch\
- $git_state\
- $git_status\
- $line_break\
- $python\
- $character"""
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$line_break\
+$python\
+$character"""
 
- [directory]
- style = "#88c0d0" # Lime
+[directory]
+style = "#88c0d0" # Lime
 
- [character]
- success_symbol = "[❯](#b48ead)" # Purple
- error_symbol = "[❯](#bf616a)" # Red
- vicmd_symbol = "[❮](#a3be8c)" # Green
+[character]
+success_symbol = "[❯](#b48ead)" # Purple
+error_symbol = "[❯](#bf616a)" # Red
+vicmd_symbol = "[❮](#a3be8c)" # Green
 
- [git_branch]
- format = "[$branch]($style)"
- style = "#d08770" # Orange
+[git_branch]
+format = "[$branch]($style)"
+style = "#d08770" # Orange
 
- [git_status]
- format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
- style = "#5e81ac" # Cyan
- conflicted = "​"
- untracked = "​"
- modified = "​"
- staged = "​"
- renamed = "​"
- deleted = "​"
- stashed = "≡"
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "#5e81ac" # Cyan
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
 
- [git_state]
- format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
- style = "#ebcb8b" # Yellow
+[git_state]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "#ebcb8b" # Yellow
 
- [python]
- format = "[$virtualenv]($style) "
- style = "#ebcb8b" # Yellow
+[python]
+format = "[$virtualenv]($style) "
+style = "#ebcb8b" # Yellow
