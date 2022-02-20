@@ -40,5 +40,5 @@ format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahe
 style = "#ebcb8b" # Yellow
 
 [python]
-format = "[$virtualenv]($style) "
+format = "[($virtualenv )]($style)"
 style = "#ebcb8b" # Yellow
