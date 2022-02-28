@@ -30,4 +30,7 @@
     ],
     "window.zoomLevel": 1,
     "extensions.ignoreRecommendations": true,
+    "cSpell.userWords": [
+        "hashable"
+    ],
 }
