@@ -16,9 +16,8 @@ $character"""
 style = "#88c0d0" # Lime
 
 [character]
-success_symbol = "[❯](#b48ead)" # Purple
-error_symbol = "[❯](#bf616a)" # Red
-vicmd_symbol = "[❮](#a3be8c)" # Green
+success_symbol = "[❯](bold #a3be8c)" # Green
+error_symbol = "[❯](bold #bf616a)" # Red
 
 [git_branch]
 format = "[$branch]($style)"

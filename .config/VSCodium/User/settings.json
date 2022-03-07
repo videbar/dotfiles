@@ -33,4 +33,6 @@
     "cSpell.userWords": [
         "hashable"
     ],
+    "editor.fontFamily": "Iosevka Medium Extended",
+    "editor.fontLigatures": true
 }
