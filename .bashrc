@@ -73,6 +73,11 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 [ -f /usr/share/bash-completion/completions/git  ] && . /usr/share/bash-completion/completions/git
 __git_complete dotfiles __git_main
 
+
+if [ "$(command -v codium)" ]; then
+    alias code=codium
+fi
+
 # Starship
 if [ "$(command -v starship)" ]; then
     eval "$(starship init bash)"
