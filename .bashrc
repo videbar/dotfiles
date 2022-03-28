@@ -25,6 +25,11 @@ alias eng='LANG=en_US.UTF-8 bash'
 alias h='history | grep'
 alias f='find . -name'
 
+# Create a backup of a file
+function bk(){
+    cp "$1" "$1.orig";
+}
+
 # Exports
 export VISUAL=vim
 export EDITOR="$VISUAL"
