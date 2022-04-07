@@ -19,6 +19,9 @@ shopt -s histappend
 HISTSIZE=3000
 HISTFILESIZE=3000
 
+# Disable software flow control (the terminal freezes when pressing ctrl-s)
+stty -ixon
+
 # User specific aliases and functions
 alias python='python3'
 alias eng='LANG=en_US.UTF-8 bash'
@@ -29,6 +32,28 @@ alias f='find . -name'
 function bk(){
     cp "$1" "$1.orig";
 }
+# Go up multiple directories. More convinient than cp ../../../
+function up(){
+    # It can take multiple dots up .. = cp .., up ... = cp../.. and so on.
+    if [[ "$1" =~ ^\.{2,}$ ]]; then
+        let PARENTS=${#1}-1
+
+    # It also takes numbers.
+    elif [[ "$1" =~ ^[0-9]+$ ]]; then
+        PARENTS="$1"
+
+    else
+        echo "$0": invalid argument, use either an integer or a set of dots, e.g, ... >&2
+        (exit 1)
+    fi
+    
+    for (( i=1; i<=$PARENTS; i++ ))
+    do
+        cd ..
+    done
+
+}
+
 
 # Exports
 export VISUAL=vim
@@ -74,6 +99,7 @@ complete -o default -F _pip_completion pip
 
 # Dotfiles configuration
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 # Tabcomplete for dotfiles
 [ -f /usr/share/bash-completion/completions/git  ] && . /usr/share/bash-completion/completions/git
 __git_complete dotfiles __git_main
