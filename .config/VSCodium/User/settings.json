@@ -34,5 +34,6 @@
         "hashable"
     ],
     "editor.fontFamily": "Fira Code Retina",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "python.analysis.typeCheckingMode": "strict"
 }
