@@ -35,5 +35,5 @@
     ],
     "editor.fontFamily": "Fira Code Retina",
     "editor.fontLigatures": true,
-    "python.analysis.typeCheckingMode": "strict"
+    "python.analysis.typeCheckingMode": "basic"
 }
