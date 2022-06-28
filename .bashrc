@@ -47,11 +47,14 @@ function up(){
         (exit 1)
     fi
     
+    CURRENT_PATH="$PWD"
+
     for (( i=1; i<=$PARENTS; i++ ))
     do
-        cd ..
+        CURRENT_PATH="$CURRENT_PATH/.."
     done
 
+    cd $CURRENT_PATH
 }
 
 
