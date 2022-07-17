@@ -47,14 +47,14 @@ function up(){
         (exit 1)
     fi
     
-    CURRENT_PATH="$PWD"
+    TARGET_PATH="$PWD"
 
     for (( i=1; i<=$PARENTS; i++ ))
     do
-        CURRENT_PATH="$CURRENT_PATH/.."
+        TARGET_PATH="$TARGET_PATH/.."
     done
 
-    cd $CURRENT_PATH
+    cd $TARGET_PATH
 }
 
 
