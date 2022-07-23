@@ -145,3 +145,14 @@ fi
 if [ "$(command -v zoxide)" ]; then
     eval "$(zoxide init bash)"
 fi
+
+# Use rmtrash instead of rm and rmdirtrash instead of rmdir:
+if [ "$(command -v rmtrash)"  ] && [ "$(command -v trash)"  ]; then
+    alias rm='rmtrash --forbid-root'
+    alias sudo='sudo '
+fi
+
+if [ "$(command -v rmdirtrash)"  ] && [ "$(command -v trash)"  ]; then
+    alias rmdir='rmdirtrash --forbid-root'
+    alias sudo='sudo '
+fi
