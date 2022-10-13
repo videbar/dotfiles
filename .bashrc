@@ -9,9 +9,6 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
-
 # Append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -25,7 +22,6 @@ stty -ixon
 # User specific aliases and functions
 alias python='python3'
 alias eng='LANG=en_US.UTF-8 bash'
-alias h='history | grep'
 alias f='find . -name'
 
 # Create a backup of a file
