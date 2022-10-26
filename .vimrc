@@ -87,7 +87,7 @@ endfunction
 " auto-pairs
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
-" map leader key to comma
+" map leader key to the space bar
 let mapleader = "\<Space>"
 
 " word movement
@@ -112,11 +112,8 @@ nnoremap <silent> <C-s> :call ToggleSpellCheck()<CR>
 " commenting key bindings
 let g:NERDCreateDefaultMappings=1
 let g:NERDSpaceDelims = 1
-nmap <C-_> <plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle
-
-" comment from current" position to end of line 
-nmap <C-?> <Plug>NERDCommenterToEOL 
+nmap <C-n> <plug>NERDCommenterToggle
+vmap <C-n> <Plug>NERDCommenterToggle
 
 " adds a comment at the end of the line
 nmap <leader>A <Plug>NERDCommenterAppend
