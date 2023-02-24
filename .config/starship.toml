@@ -6,6 +6,7 @@ $username\
 $hostname\
 $directory\
 $git_branch\
+${custom.git_clean}\
 $git_state\
 $git_status\
 $line_break\
@@ -25,20 +26,47 @@ format = "[$branch]($style)"
 style = "#d08770" # Orange
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = "[( $ahead_behind$stashed)]($style)"
 style = "#5e81ac" # Cyan
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
 stashed = "≡"
 
 [git_state]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = "[( $ahead_behind$stashed)]($style)"
 style = "#ebcb8b" # Yellow
 
 [python]
 format = "[($virtualenv )]($style)"
 style = "#ebcb8b" # Yellow
+
+# Custom script to check if the current directory is a clean git repository.
+[custom.git_clean]
+command = "echo '*'"
+when='''
+#!/bin/bash
+# This script should return 0 if inside a git repo which is not clean.
+
+# Exit code of 1 when not in a git repository.
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1
+then
+    exit 1
+fi
+
+# Check if there are stagged changes not yet committed, or there are changes in the
+# working three that can be staged.
+$(git diff-index --quiet HEAD --)
+uncommited_changes=$?
+
+# Check if there are untracked (un-ignored) files and also conflicted files.
+conflicted_untracked=$(git ls-files --others --unmerged --exclude-standard)
+
+# If any of the previous checks succeed, exit with 0.
+if [[ $uncommited_changes -eq 1 || -n $conflicted_untracked ]]
+then
+    exit 0
+fi
+
+# Otherwise, exit with 1.
+exit 1
+'''
+style = "218"
+shell="bash"
