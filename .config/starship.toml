@@ -23,7 +23,7 @@ error_symbol = "[❯](bold #bf616a)" # Red
 
 [git_branch]
 format = "[$branch]($style)"
-style = "#d08770" # Orange
+style = "#5e81ac" # Cyan
 
 [git_status]
 format = "[( $ahead_behind$stashed)]($style)"
@@ -36,7 +36,7 @@ style = "#ebcb8b" # Yellow
 
 [python]
 format = "[($virtualenv )]($style)"
-style = "#ebcb8b" # Yellow
+style = "#b48ead" # Pink
 
 # Custom script to check if the current directory is a clean git repository.
 [custom.git_clean]
