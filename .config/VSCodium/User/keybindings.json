@@ -36,7 +36,7 @@
     {
         "key": "ctrl+n",
         "command": "editor.action.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible"
     },
     {
         "key": "ctrl+/",
