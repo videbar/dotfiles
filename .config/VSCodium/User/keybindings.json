@@ -45,6 +45,10 @@
     },
     {
         "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+x",
         "command": "workbench.action.togglePanel"
     },
     {

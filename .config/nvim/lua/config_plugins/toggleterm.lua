@@ -6,12 +6,13 @@ vim.keymap.set("t", "<C-w>l", [[<Cmd>wincmd l<CR>]])
 vim.keymap.set("t", "<C-w>w", [[<Cmd>wincmd w<CR>]])
 
 -- Open and close terminals.
-vim.keymap.set({ "t", "n" }, "<C-e>", [[<Cmd>ToggleTerm direction=horizontal<CR>]])
-vim.keymap.set("n", "<leader>el", [[<Cmd>ToggleTerm direction=vertical<CR>]])
+vim.keymap.set({ "t", "n" }, "<C-x>", [[<Cmd>ToggleTerm direction=horizontal<CR>]])
+-- Open a vertical terminal:
+-- vim.keymap.set("n", "<leader>x", [[<Cmd>ToggleTerm direction=vertical<CR>]])
 
 -- Kemaps to send text to the terminal.
-vim.keymap.set("n", "<leader>es", [[<Cmd>ToggleTermSendCurrentLine<CR>]])
-vim.keymap.set("v", "<leader>es", ":ToggleTermSendVisualSelection<CR>",
+vim.keymap.set("n", "<leader>x", [[<Cmd>ToggleTermSendCurrentLine<CR>]])
+vim.keymap.set("v", "<leader>x", ":ToggleTermSendVisualSelection<CR>",
     { noremap = true, silent = true })
 
 require("toggleterm").setup {
