@@ -2,7 +2,8 @@
 [
     {
         "key": "ctrl+enter",
-        "command": "python.execInTerminal"
+        "command": "python.execInTerminal",
+        "when": "!notebookEditorFocused && editorLangId == 'python'"
     },
     {
         "key": "ctrl+enter",
@@ -18,11 +19,6 @@
         "key": "ctrl+shift+enter",
         "command": "extension.markdown-pdf.pdf",
         "when": "!notebookEditorFocused && editorLangId == 'markdown'"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "workbench.action.terminal.focus",
-        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+w k",
@@ -48,7 +44,7 @@
         "command": "-workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+x",
+        "key": "ctrl+g",
         "command": "workbench.action.togglePanel"
     },
     {
@@ -59,5 +55,25 @@
     {
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "shift+escape",
+        "command": "-workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
     },
 ]
