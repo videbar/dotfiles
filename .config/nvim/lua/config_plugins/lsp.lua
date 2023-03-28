@@ -9,6 +9,9 @@ lsp.preset({ name = "recommended", set_lsp_keymaps = true, manage_nvim_cmp = tru
 
 lsp.ensure_installed({ "rust_analyzer", "pylsp" })
 
+lsp.configure("pylsp",
+    { settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } } })
+
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
