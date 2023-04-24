@@ -59,3 +59,9 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- telescope from folding:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 vim.cmd [[autocmd BufEnter * normal zx zR]]
+
+vim.opt.textwidth = 88
+-- Use internal formatting for bindings like gq.
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args) vim.bo[args.buf].formatexpr = nil end
+})
