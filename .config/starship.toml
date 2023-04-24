@@ -18,8 +18,8 @@ style = "#88c0d0" # Lime
 read_only = " "
 
 [character]
-success_symbol = "[❯](bold #a3be8c)" # Green
-error_symbol = "[❯](bold #bf616a)" # Red
+success_symbol = "[⮞](bold #a3be8c)" # Green
+error_symbol = "[⮞](bold #bf616a)" # Red
 
 [git_branch]
 format = "[$branch]($style)"
