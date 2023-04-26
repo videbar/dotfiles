@@ -60,7 +60,11 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 vim.cmd [[autocmd BufEnter * normal zx zR]]
 
+-- Disable rust recommended style so it doesn't overwrite my text width.
+vim.g.rust_recommended_style = 0
 vim.opt.textwidth = 88
+-- List of options: https://neovim.io/doc/user/change.html#fo-table
+vim.opt.formatoptions = "jrql"
 -- Use internal formatting for bindings like gq.
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args) vim.bo[args.buf].formatexpr = nil end
