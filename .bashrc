@@ -142,7 +142,7 @@ if [ "$(command -v zoxide)" ]; then
     eval "$(zoxide init bash)"
 fi
 
-# Use rmtrash instead of rm and rmdirtrash instead of rmdir:
+# Use rmtrash instead of rm and rmdirtrash instead of rmdir
 if [ "$(command -v rmtrash)"  ] && [ "$(command -v trash)"  ]; then
     alias true-rm='rm'
     alias rm='rmtrash --forbid-root'
@@ -153,4 +153,23 @@ if [ "$(command -v rmdirtrash)"  ] && [ "$(command -v trash)"  ]; then
     alias true-rmdir='rmdir'
     alias rmdir='rmdirtrash --forbid-root'
     alias sudo='sudo '
+fi
+
+# Enable fzf keybdingings and theme
+if [ "$(command -v fzf)"  ]; then
+    export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+        --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
+        --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
+        --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
+        --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+     source /usr/share/fzf/shell/key-bindings.bash
+
+     # Some alias
+     alias fnvim='fzf --bind "enter:become(nvim {})"'
+     # Use vscodium if it's installed, and, if not, fallback to vscode.
+    if [ "$(command -v codium)" ]; then
+        alias fcode='fzf --bind "enter:become(codium {})"'
+    else
+        alias fcode='fzf --bind "enter:become(code {})"'
+    fi
 fi
