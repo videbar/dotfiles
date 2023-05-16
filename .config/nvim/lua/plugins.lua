@@ -1,9 +1,9 @@
--- Packer plugins.
+-- Packer plugins
 return require("packer").startup(function(use)
     -- Packer can manage itself.
     use "wbthomason/packer.nvim"
 
-    -- Telescope.
+    -- Telescope
     use {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
@@ -50,28 +50,28 @@ return require("packer").startup(function(use)
         }
     }
 
-    -- Rust tools.
+    -- Rust tools
     use "simrat39/rust-tools.nvim"
 
-    -- Comment.
+    -- Comment
     use { "numToStr/Comment.nvim", config = function() require("Comment").setup() end }
 
-    -- Toggleterm.
+    -- Toggleterm
     use {
         "akinsho/toggleterm.nvim",
         tag = "*",
         config = function() require("toggleterm").setup() end
     }
 
-    -- Lualine.
+    -- Lualine
     use {
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true }
     }
 
-    -- Autopairs.
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
+    -- Autopairs
+    use "windwp/nvim-autopairs"
+
+    -- Surround
+    use "tpope/vim-surround"
 end)
