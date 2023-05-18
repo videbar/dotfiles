@@ -74,4 +74,7 @@ return require("packer").startup(function(use)
 
     -- Surround
     use "tpope/vim-surround"
+
+    -- Lastplace
+    use "farmergreg/vim-lastplace"
 end)
