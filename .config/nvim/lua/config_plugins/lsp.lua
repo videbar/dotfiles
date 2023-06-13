@@ -14,10 +14,10 @@ lsp.configure("pylsp",
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-    ["<S-Tab>"] = nil
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<S-Tab>"] = nil
 })
 
 -- Include parenthesis and similar delimiters when using autocomplete.
@@ -38,6 +38,14 @@ local cmp_config = lsp.defaults.cmp_config({
         end
     end
 })
+
+-- Lsp keybindings
+lsp.on_attach(function(client, bufnr)
+    lsp.default_keymaps({ buffer = bufnr })
+
+    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = true })
+    vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+end)
 
 --
 -- Use null-ls for formatting.
@@ -83,7 +91,9 @@ end)
 -- Configura rust tools
 --
 
+local rust_lsp = lsp.build_options("rust_analyzer")
 require("rust-tools").setup({
+    server = rust_lsp,
     tools = {
         server = rust_lsp,
         inlay_hints = {

@@ -18,8 +18,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- Remap <C-c> to the escape key so that vertical editing works properly.
-vim.keymap.set("i", "<C-c>", "<Esc>")
+-- Remap <C-c> to the escape key so that vertical editing works properly. Also in
+-- command mode so that when I attemp to rename a variable and the cancel with <C-c> ,
+-- it doesn't crash.
+vim.keymap.set({ "i", "c" }, "<C-c>", "<Esc>")
 
 -- Use <leader>s to replace the current word.
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
