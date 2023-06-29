@@ -3,16 +3,16 @@
 
 [user]
 	name = Pedro Videgain Barranco
-
-[includeIf "gitdir/i:home/p.videgain.barranco/**"]
-	path = ~/.work-gitconfig
-
-[includeIf "gitdir/i:home/videbar/**"]
-	path = ~/.play-gitconfig
+	email = pedro@vide.bar
 
 [core]
 	editor = vim
 	pager = delta
+
+; Load this config if using the work computer. It will overwrite previously defined
+; options.
+; [includeIf "gitdir/i:home/p.videgain.barranco/**"]
+; 	path = ~/.work-gitconfig
 
 [alias]
 	graph = log --oneline --graph --decorate
