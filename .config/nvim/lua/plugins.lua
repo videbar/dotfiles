@@ -50,8 +50,8 @@ return require("packer").startup(function(use)
         }
     }
 
-    -- Rust tools
-    use "simrat39/rust-tools.nvim"
+    -- Inlay hints
+    use "lvimuser/lsp-inlayhints.nvim"
 
     -- Comment
     use { "numToStr/Comment.nvim", config = function() require("Comment").setup() end }

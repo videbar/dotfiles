@@ -1,5 +1,6 @@
 local lsp = require("lsp-zero")
 local cmp = require("cmp")
+local hints = require("lsp-inlayhints")
 
 --
 -- Lsp configuration.
@@ -14,10 +15,10 @@ lsp.configure("pylsp",
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-        ["<S-Tab>"] = nil
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+    ["<S-Tab>"] = nil
 })
 
 -- Include parenthesis and similar delimiters when using autocomplete.
@@ -41,6 +42,7 @@ local cmp_config = lsp.defaults.cmp_config({
 
 -- Lsp keybindings
 lsp.on_attach(function(client, bufnr)
+    hints.on_attach(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
 
     vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = true })
@@ -64,6 +66,8 @@ local null_ls_config = {
     }
 }
 
+-- Inlay hints
+hints.setup()
 null_ls.setup(null_ls_config)
 cmp.setup(cmp_config)
 lsp.setup()
@@ -85,21 +89,5 @@ vim.keymap.set("n", "<leader>h", function()
         vim.diagnostic.enable()
         vim.g.diagnostics_visible = true
     end
+    hints.toggle()
 end)
-
---
--- Configura rust tools
---
-
-local rust_lsp = lsp.build_options("rust_analyzer")
-require("rust-tools").setup({
-    server = rust_lsp,
-    tools = {
-        server = rust_lsp,
-        inlay_hints = {
-            show_parameter_hints = false,
-            parameter_hints_prefix = "",
-            other_hints_prefix = ""
-        }
-    }
-})
