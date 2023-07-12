@@ -31,8 +31,10 @@ vim.opt.termguicolors = true
 -- How often vim checks if something is going on with the file (in milliseconds).
 vim.opt.updatetime = 50
 
--- Set the column that indicates the line length.
-vim.opt.colorcolumn = "88"
+-- Set the column that indicates the line length. Use relative values to handle rust's
+-- text width.
+vim.opt.textwidth = 88
+vim.opt.colorcolumn = "+1"
 
 -- Enable cursor line.
 vim.opt.cursorline = true
@@ -59,10 +61,6 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- telescope from folding:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 vim.cmd [[autocmd BufEnter * normal zx zR]]
-
--- Disable rust recommended style so it doesn't overwrite my text width.
-vim.g.rust_recommended_style = 0
-vim.opt.textwidth = 88
 
 -- List of options: https://neovim.io/doc/user/change.html#fo-table
 vim.opt.formatoptions = "jrql"
