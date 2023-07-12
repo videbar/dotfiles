@@ -60,7 +60,10 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- Workaround to avoid a bug in telescope. It prevents a file that has been opened with
 -- telescope from folding:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
-vim.cmd [[autocmd BufEnter * normal zx zR]]
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNew", "BufWinEnter" }, {
+    group = vim.api.nvim_create_augroup("ts_fold_workaround", { clear = true }),
+    command = "set foldexpr=nvim_treesitter#foldexpr()"
+})
 
 -- List of options: https://neovim.io/doc/user/change.html#fo-table
 vim.opt.formatoptions = "jrql"
