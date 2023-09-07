@@ -23,9 +23,6 @@ return require("packer").startup(function(use)
     -- Undotree
     use "mbbill/undotree"
 
-    -- Vim-fugitive
-    use "tpope/vim-fugitive"
-
     -- Language server protocol
     use {
         "VonHeikemen/lsp-zero.nvim",
