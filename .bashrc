@@ -9,15 +9,21 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Append to the history file, don't overwrite it
+
+# Append to the history file, don't overwrite it.
 shopt -s histappend
 
-# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1).
 HISTSIZE=3000
 HISTFILESIZE=3000
 
-# Disable software flow control (the terminal freezes when pressing ctrl-s)
+# Disable software flow control (the terminal freezes when pressing ctrl-s).
 stty -ixon
+
+# Define a different .bashrc file only for the work computer.
+if [ -e "$HOME/.bashrc_work" ]; then
+    source $HOME/.bashrc_work 
+fi
 
 # User specific aliases and functions
 alias python='python3'
@@ -114,7 +120,7 @@ if [ "$(command -v starship)" ]; then
 else
     # Disable the default virtualenv prompt change
     export VIRTUAL_ENV_DISABLE_PROMPT=1
-    
+
     # Call my custom function
     VENV="\$(virtualenv_info)"
     
@@ -142,7 +148,8 @@ if [ "$(command -v zoxide)" ]; then
     eval "$(zoxide init bash)"
 fi
 
-# Use rmtrash instead of rm and rmdirtrash instead of rmdir
+# Use rmtrash instead of rm and rmdirtrash instead of rmdir. Source:
+# https://github.com/PhrozenByte/rmtrash
 if [ "$(command -v rmtrash)"  ] && [ "$(command -v trash)"  ]; then
     alias true-rm='rm'
     alias rm='rmtrash --forbid-root'
@@ -162,11 +169,24 @@ if [ "$(command -v fzf)"  ]; then
         --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
         --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
         --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
-     source /usr/share/fzf/shell/key-bindings.bash
 
-     # Some alias
-     alias fnvim='fzf --bind "enter:become(nvim {})"'
-     # Use vscodium if it's installed, and, if not, fallback to vscode.
+    # Source the fzf keybindings. The exact location depends on the distribution.
+    POTENTIAL_LOCATIONS=(
+        "/usr/share/doc/fzf/examples/key-bindings.bash"
+        "/usr/share/fzf/shell/key-bindings.bash"
+    )
+
+    for i in "${POTENTIAL_LOCATIONS[@]}"
+    do
+        if [ -e "$i" ]; then
+            source "$i"
+            break
+        fi
+    done
+
+    # Some alias
+    alias fnvim='fzf --bind "enter:become(nvim {})"'
+    # Use vscodium if it's installed, and, if not, fallback to vscode.
     if [ "$(command -v codium)" ]; then
         alias fcode='fzf --bind "enter:become(codium {})"'
     else
