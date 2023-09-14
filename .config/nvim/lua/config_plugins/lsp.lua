@@ -8,7 +8,7 @@ local hints = require("lsp-inlayhints")
 
 lsp.preset({ name = "recommended", set_lsp_keymaps = true, manage_nvim_cmp = true })
 
-lsp.ensure_installed({ "rust_analyzer", "pylsp", "lua_ls" })
+lsp.ensure_installed({ "rust_analyzer", "pylsp", "lua_ls", })
 
 lsp.configure("pylsp",
     { settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } } })
