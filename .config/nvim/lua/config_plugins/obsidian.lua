@@ -3,7 +3,6 @@ local obsidian = require("obsidian")
 obsidian.setup({
     dir = "$HOME/.obsidian/main",
 
-
     -- Optional, completion.
     completion = {
         -- If using nvim-cmp, otherwise set to false
@@ -23,7 +22,7 @@ obsidian.setup({
     -- Optional, key mappings.
     mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-        ["gf"] = require("obsidian.mapping").gf_passthrough(),
+        ["gf"] = require("obsidian.mapping").gf_passthrough()
     },
 
     -- Optional, set to true if you don't want obsidian.nvim to manage frontmatter.
@@ -34,7 +33,7 @@ obsidian.setup({
         -- The default height of the backlinks pane.
         height = 10,
         -- Whether or not to wrap lines.
-        wrap = true,
+        wrap = true
     },
 
     -- URL it will be ignored but you can customize this behavior here.
@@ -47,7 +46,7 @@ obsidian.setup({
     note_id_func = function(title)
         if title ~= nil then
             -- If title is given, transform it into valid file name.
-            return title:gsub('[%*"\\/<>:|%?]', ""):lower()
+            return title:gsub("[%*\"\\/<>:|%?]", ""):lower()
         else
             error("No valid name was given")
         end
@@ -70,18 +69,11 @@ obsidian.setup({
     open_notes_in = "current"
 
 })
-
--- Remap to add a new note, using `vim.fn.input` to ask the name.
+-- Remap to add a new note, using `vim.ui.input` to ask the name.
 vim.keymap.set("n", "<leader>on", function()
-    local name = vim.fn.input("Note name > ")
-    -- If the note name is made out of only spaces, abort.
-    if name:match("^%s*$") then
-        print("Aborted")
-        return
-    else
-        vim.cmd("ObsidianNew " .. name)
-    end
-end
-)
+    vim.ui.input({ prompt = "Note name > " }, function(input)
+        if input ~= nil then vim.cmd("ObsidianNew " .. input) end
+    end)
+end)
 vim.keymap.set("n", "<leader>of", vim.cmd.ObsidianQuickSwitch)
 vim.keymap.set("n", "<leader>os", vim.cmd.ObsidianSearch)
