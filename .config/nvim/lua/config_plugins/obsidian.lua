@@ -74,7 +74,8 @@ obsidian.setup({
 -- Remap to add a new note, using `vim.fn.input` to ask the name.
 vim.keymap.set("n", "<leader>on", function()
     local name = vim.fn.input("Note name > ")
-    if name == "" then
+    -- If the note name is made out of only spaces, abort.
+    if name:match("^%s*$") then
         print("Aborted")
         return
     else
