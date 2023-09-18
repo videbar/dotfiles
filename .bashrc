@@ -18,7 +18,7 @@ HISTSIZE=3000
 HISTFILESIZE=3000
 
 # Disable software flow control (the terminal freezes when pressing ctrl-s).
-stty -ixon
+[ -t 0 ] && stty -ixon
 
 # Define a different .bashrc file only for the work computer.
 if [ -e "$HOME/.bashrc_work" ]; then
