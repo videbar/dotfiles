@@ -141,6 +141,9 @@ fi
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
     alias cat='bat --theme="Nord"'
+# Sometimes the executable is installed as batcat.
+elif [ "$(command -v batcat)" ]; then
+    alias cat='batcat --theme="Nord"'
 fi
 
 # Use z for navigation
