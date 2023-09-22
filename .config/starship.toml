@@ -14,34 +14,34 @@ $python\
 $character"""
 
 [directory]
-style = "#88c0d0" # Lime
+style = "#88c0d0"
 read_only = " "
 
 [character]
-success_symbol = "[⮞](bold #a3be8c)" # Green
-error_symbol = "[⮞](bold #bf616a)" # Red
+success_symbol = "[⮞](#88c0d0)"
+error_symbol = "[⮞](#bf616a)"
 
 [git_branch]
 format = "[$branch]($style)"
-style = "#5e81ac" # Cyan
+style = "#5e81ac"
 
 [git_status]
 format = "[( $ahead_behind$stashed)]($style)"
-style = "#5e81ac" # Cyan
+style = "#5e81ac"
 stashed = "≡"
 
 [git_state]
 format = "[( $ahead_behind$stashed)]($style)"
-style = "#ebcb8b" # Yellow
+style = "#ebcb8b"
 
 [python]
 format = "[($virtualenv )]($style)"
-style = "#b48ead" # Pink
+style = "#a3be8c"
 
 # Custom script to check if the current directory is a clean git repository.
 [custom.git_clean]
 command = "echo '*'"
-when='''
+when = '''
 #!/bin/bash
 # This script should return 0 if inside a git repo which is not clean.
 
@@ -69,4 +69,4 @@ fi
 exit 1
 '''
 style = "218"
-shell="bash"
+shell = "bash"
