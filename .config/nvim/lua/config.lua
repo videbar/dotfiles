@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNew", "BufWinEnter" }, {
 })
 
 -- List of options: https://neovim.io/doc/user/change.html#fo-table
-vim.opt.formatoptions = "jrql"
+vim.opt.formatoptions = "jql"
 
 -- Use internal formatting for bindings like gq.
 vim.api.nvim_create_autocmd("LspAttach", {
