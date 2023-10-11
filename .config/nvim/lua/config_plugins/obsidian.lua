@@ -36,17 +36,11 @@ obsidian.setup({
         wrap = true
     },
 
-    -- URL it will be ignored but you can customize this behavior here.
-    follow_url_func = function(url)
-        -- Open the URL in the default web browser.
-        vim.fn.jobstart({ "xdg-open", url }) -- linux
-    end,
-
     -- Configure how to generate the filename from the note title.
     note_id_func = function(title)
         if title ~= nil then
             -- If title is given, transform it into valid file name.
-            return title:gsub("[%*\"\\/<>:|%?]", ""):lower()
+            return title:gsub("[%*\"\\/<>:|%?]", "")
         else
             error("No valid name was given")
         end
@@ -77,3 +71,4 @@ vim.keymap.set("n", "<leader>on", function()
 end)
 vim.keymap.set("n", "<leader>of", vim.cmd.ObsidianQuickSwitch)
 vim.keymap.set("n", "<leader>os", vim.cmd.ObsidianSearch)
+vim.keymap.set("n", "<leader>ob", vim.cmd.ObsidianBacklinks)
