@@ -1,46 +1,118 @@
-local wezterm = require "wezterm";
-return {
-    enable_tab_bar = false,
-    font = wezterm.font("Fira Code"),
-    font_size = 12.0,
-    command_palette_fg_color = "#e5e9f0",
-    command_palette_bg_color = "#434c5e",
-    color_scheme = "nord",
-    enable_wayland = false,
-    keys = {
-        {
-            key = "n",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
-        }, {
-        key = "m",
-        mods = "SHIFT|CTRL",
-        action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" }
-    },
-        {
-            key = "h",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action.ActivatePaneDirection "Left"
-        },
-        {
-            key = "l",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action.ActivatePaneDirection "Right"
-        },
-        {
-            key = "j",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action.ActivatePaneDirection "Down"
-        },
-        {
-            key = "k",
-            mods = "SHIFT|CTRL",
-            action = wezterm.action.ActivatePaneDirection "Up"
-        }, {
-        key = "q",
-        mods = "SHIFT|CTRL",
-        action = wezterm.action.CloseCurrentPane { confirm = true }
-    }
+-- Inspired by: https://github.com/theopn/dotfiles/blob/main/wezterm/wezterm.lua
+local wezterm = require("wezterm")
+local act = wezterm.action
 
-    }
+local config = wezterm.config_builder()
+
+config.enable_tab_bar = false
+config.tab_bar_at_bottom = true
+config.font = wezterm.font("Fira Code")
+config.font_size = 11.0
+config.command_palette_fg_color = "#e5e9f0"
+config.command_palette_bg_color = "#434c5e"
+config.color_scheme = "nord"
+config.default_workspace = "main"
+config.enable_wayland = false
+
+-- Function used to create a custom workspace navigator.
+local function workspace_navigator()
+    return wezterm.action_callback(function(window, pane)
+        local workspaces = wezterm.mux.get_workspace_names()
+        local choices = {}
+        -- Keeps track of whether or not the default workspace is opened. Used so that
+        -- the default always appears at the top of the navigator.
+        local has_default = false
+        for _, ws in ipairs(workspaces) do
+            if ws == config.default_workspace then
+                has_default = true
+            else
+                table.insert(choices, { label = ws, id = ws })
+            end
+        end
+        if has_default then
+            table.insert(choices, 1, {
+                label = config.default_workspace,
+                id = config.default_workspace,
+            })
+        end
+        table.insert(choices, {
+            label = wezterm.format({
+                { Attribute = { Intensity = "Bold" } },
+                { Text = "Create new workspace" },
+            }),
+            id = "new",
+        })
+        window:perform_action(
+            act.InputSelector({
+                title = "Workspaces",
+                choices = choices,
+                action = wezterm.action_callback(
+                    function(sub_window, sub_pane, id, _label)
+                        if id == nil then
+                            return
+                        elseif id == "new" then
+                            window:perform_action(act.SwitchToWorkspace, pane)
+                        else
+                            wezterm.mux.set_active_workspace(id)
+                        end
+                    end
+                ),
+            }),
+            pane
+        )
+    end)
+end
+
+-- Keys
+config.leader = { key = "phys:Space", mods = "CTRL", timeout_milliseconds = 1000 }
+
+config.keys = {
+    { key = "phys:Space", mods = "LEADER", action = act.ActivateCommandPalette },
+    -- Panes
+    {
+        key = "s",
+        mods = "LEADER",
+        action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "v",
+        mods = "LEADER",
+        action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+    { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
+    { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+    { key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
+    -- Tabs
+    {
+        key = "r",
+        mods = "LEADER",
+        action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+    },
+    { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+    { key = "u", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+    { key = "i", mods = "LEADER", action = act.ActivateTabRelative(1) },
+    { key = "e", mods = "LEADER", action = act.ShowTabNavigator },
+    -- Workspaces
+    { key = "w", mods = "LEADER", action = workspace_navigator() },
+    { key = "n", mods = "LEADER", action = act.SwitchWorkspaceRelative(1) },
+    { key = "p", mods = "LEADER", action = act.SwitchWorkspaceRelative(-1) },
 }
+
+config.key_tables = {
+    resize_pane = {
+        { key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+        { key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+        { key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+        { key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+        { key = "Escape", action = "PopKeyTable" },
+        { key = "Enter", action = "PopKeyTable" },
+        { key = "q", action = "PopKeyTable" },
+        { key = "c", mods = "CTRL", action = "PopKeyTable" },
+    },
+}
+
+return config
