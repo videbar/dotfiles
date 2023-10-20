@@ -4,10 +4,9 @@ require("nvim-surround").setup({
         ["w"] = {
             add = { "[[", "]]" },
             find = function()
-                return require("nvim-surround.config").get_selection { motion = "2a]" }
+                return require("nvim-surround.config").get_selection({ motion = "2a]" })
             end,
-            delete = "^(%[%[)().-(%]%])()$"
-
-        }
-    }
+            delete = "^(%[%[)().-(%]%])()$",
+        },
+    },
 })

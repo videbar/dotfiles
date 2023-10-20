@@ -16,13 +16,13 @@ obsidian.setup({
 
         -- Whether to add the output of the node_id_func to new notes in autocompletion.
         -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
-        prepend_note_id = false
+        prepend_note_id = false,
     },
 
     -- Optional, key mappings.
     mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-        ["gf"] = require("obsidian.mapping").gf_passthrough()
+        ["gf"] = require("obsidian.mapping").gf_passthrough(),
     },
 
     -- Optional, set to true if you don't want obsidian.nvim to manage frontmatter.
@@ -33,14 +33,14 @@ obsidian.setup({
         -- The default height of the backlinks pane.
         height = 10,
         -- Whether or not to wrap lines.
-        wrap = true
+        wrap = true,
     },
 
     -- Configure how to generate the filename from the note title.
     note_id_func = function(title)
         if title ~= nil then
             -- If title is given, transform it into valid file name.
-            return title:gsub("[%*\"\\/<>:|%?]", "")
+            return title:gsub('[%*"\\/<>:|%?]', "")
         else
             error("No valid name was given")
         end
@@ -60,13 +60,14 @@ obsidian.setup({
     -- Optional, determines whether to open notes in a horizontal split, a vertical split,
     -- or replacing the current buffer (default)
     -- Accepted values are "current", "hsplit" and "vsplit"
-    open_notes_in = "current"
-
+    open_notes_in = "current",
 })
 -- Remap to add a new note, using `vim.ui.input` to ask the name.
 vim.keymap.set("n", "<leader>on", function()
     vim.ui.input({ prompt = "Note name > " }, function(input)
-        if input ~= nil then vim.cmd("ObsidianNew " .. input) end
+        if input ~= nil then
+            vim.cmd("ObsidianNew " .. input)
+        end
     end)
 end)
 vim.keymap.set("n", "<leader>of", vim.cmd.ObsidianQuickSwitch)

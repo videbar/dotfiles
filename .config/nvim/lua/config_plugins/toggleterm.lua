@@ -1,9 +1,13 @@
 -- Kemaps to send text to the terminal.
 vim.keymap.set("n", "<leader>g", [[<Cmd>ToggleTermSendCurrentLine<CR>]])
-vim.keymap.set("v", "<leader>g", ":ToggleTermSendVisualSelection<CR>",
-    { noremap = true, silent = true })
+vim.keymap.set(
+    "v",
+    "<leader>g",
+    ":ToggleTermSendVisualSelection<CR>",
+    { noremap = true, silent = true }
+)
 
-require("toggleterm").setup {
+require("toggleterm").setup({
     open_mapping = "<C-g>",
     -- when neovim changes it current directory the terminal will change it's own when
     -- next it's opened.
@@ -21,5 +25,5 @@ require("toggleterm").setup {
     -- close the terminal window when the process exits.
     close_on_exit = true,
     -- automatically scroll to the bottom on terminal output.
-    auto_scroll = true
-}
+    auto_scroll = true,
+})

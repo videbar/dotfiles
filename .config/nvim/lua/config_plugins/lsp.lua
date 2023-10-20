@@ -8,17 +8,19 @@ local hints = require("lsp-inlayhints")
 
 lsp.preset({ name = "recommended", set_lsp_keymaps = true, manage_nvim_cmp = true })
 
-lsp.ensure_installed({ "rust_analyzer", "pylsp", "lua_ls", })
+lsp.ensure_installed({ "rust_analyzer", "pylsp", "lua_ls" })
 
-lsp.configure("pylsp",
-    { settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } } })
+lsp.configure(
+    "pylsp",
+    { settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } } }
+)
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
     ["<C-d>"] = cmp.mapping.scroll_docs(4),
     ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-    ["<S-Tab>"] = nil
+    ["<S-Tab>"] = nil,
 })
 
 -- Include parenthesis and similar delimiters when using autocomplete.
@@ -31,13 +33,15 @@ lsp.setup_nvim_cmp({ mapping = cmp_mappings })
 local cmp_enabled = cmp.get_config().enabled
 local cmp_config = lsp.defaults.cmp_config({
     enabled = function()
-        if require("cmp.config.context").in_treesitter_capture("comment") == true or
-            require("cmp.config.context").in_syntax_group("Comment") then
+        if
+            require("cmp.config.context").in_treesitter_capture("comment") == true
+            or require("cmp.config.context").in_syntax_group("Comment")
+        then
             return false
         else
             return cmp_enabled()
         end
-    end
+    end,
 })
 
 -- Lsp keybindings
