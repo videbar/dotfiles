@@ -39,8 +39,8 @@ vim.opt.colorcolumn = "+1"
 -- Enable cursor line.
 vim.opt.cursorline = true
 
--- Autoformat on save.
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- Autoformat on (after) save.
+vim.cmd [[autocmd BufWritePost * FormatWrite]]
 
 -- Keep current line always in the center. This is done using an autocmd instead of the
 -- scroll option to make it work at the bottom of the document.

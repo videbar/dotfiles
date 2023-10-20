@@ -49,26 +49,8 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end)
 
---
--- Use null-ls for formatting.
---
-
-local null_ls = require("null-ls")
-local null_opts = lsp.build_options("null-ls", {})
-
-local null_ls_config = {
-    on_attach = function(client, bufnr) null_opts.on_attach(client, bufnr) end,
-    -- Formatting sources.
-    sources = {
-        null_ls.builtins.formatting.black, null_ls.builtins.formatting.lua_format.with({
-        extra_args = { "--single-quote-to-double-quote", "--column-limit=88" }
-    })
-    }
-}
-
 -- Inlay hints
 hints.setup()
-null_ls.setup(null_ls_config)
 cmp.setup(cmp_config)
 lsp.setup()
 

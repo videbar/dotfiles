@@ -89,4 +89,7 @@ return require("packer").startup(function(use)
 
     -- Lastplace
     use "farmergreg/vim-lastplace"
+    
+    -- Formatter
+    use { "mhartington/formatter.nvim" }
 end)
