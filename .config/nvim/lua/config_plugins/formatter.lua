@@ -16,15 +16,28 @@ require("formatter").setup({
 
             -- You can also define your own configuration
             function()
+                local vconfig = vim.fn.glob("stylua.toml")
+                local hconfig = vim.fn.glob(".stylua.toml")
+
+                local args = {
+                    "--indent-type",
+                    "Spaces",
+                    "--column-width",
+                    88,
+                    "-",
+                }
+
+                if vconfig ~= "" and hconfig == "" then
+                    local cwd = vim.fn.getcwd()
+                    args = { "--config-path", cwd .. "/" .. vconfig, "-" }
+                end
+                if hconfig ~= "" and vconfig == "" then
+                    local cwd = vim.fn.getcwd()
+                    args = { "--config-path", cwd .. "/" .. hconfig, "-" }
+                end
                 return {
                     exe = "stylua",
-                    args = {
-                        "--indent-type",
-                        "Spaces",
-                        "--column-width",
-                        88,
-                        "-",
-                    },
+                    args = args,
                     stdin = true,
                 }
             end,
@@ -32,6 +45,19 @@ require("formatter").setup({
         python = {
             -- "formatter.filetypes.lua" defines default configurations for the "lua" filetype
             require("formatter.filetypes.python").black,
+        },
+        cpp = {
+            -- "formatter.filetypes.lua" defines default configurations for the "lua" filetype
+            require("formatter.filetypes.cpp").astyle,
+            function()
+                return {
+                    exe = "astyle",
+                    args = {
+                        "--style=attach",
+                        "--max-code-length=88",
+                    },
+                }
+            end,
         },
 
         -- Use the special "*" filetype for defining formatter configurations on any
@@ -42,3 +68,11 @@ require("formatter").setup({
         },
     },
 })
+
+vim.keymap.set("n", "<leader>z", function()
+    print("control")
+    local cwd = vim.fn.getcwd()
+    local wd = cwd .. "**stylua.toml"
+    local config_files = vim.fn.glob(wd)
+    print(config_files)
+end)
