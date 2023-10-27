@@ -14,8 +14,8 @@ config.color_scheme = "nord"
 config.default_workspace = "main"
 config.enable_wayland = false
 
--- Function used to create a custom workspace navigator.
 local function workspace_navigator()
+    -- Returns a custom workspace navigator.
     return wezterm.action_callback(function(window, pane)
         local workspaces = wezterm.mux.get_workspace_names()
         local choices = {}
@@ -47,7 +47,7 @@ local function workspace_navigator()
                 title = "Workspaces",
                 choices = choices,
                 action = wezterm.action_callback(
-                    function(sub_window, sub_pane, id, _label)
+                    function(_sub_window, _sub_pane, id, _label)
                         if id == nil then
                             return
                         elseif id == "new" then
@@ -60,6 +60,21 @@ local function workspace_navigator()
             }),
             pane
         )
+    end)
+end
+
+local function try_move_or_split(direction)
+    -- Try to move to a pane situated in a given direction. If there is no pane, create
+    -- a new one.
+    return wezterm.action_callback(function(window, pane)
+        local current_tab = window:active_tab()
+        if current_tab:get_pane_direction(direction) == nil then
+            wezterm.log_info(direction .. " is nil")
+            window:perform_action(act.SplitPane({ direction = direction }), pane)
+        else
+            wezterm.log_info("Moving " .. direction)
+            window:perform_action(act.ActivatePaneDirection(direction), pane)
+        end
     end)
 end
 
@@ -79,10 +94,10 @@ config.keys = {
         mods = "LEADER",
         action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
     },
-    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-    { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = "h", mods = "LEADER", action = try_move_or_split("Left") },
+    { key = "j", mods = "LEADER", action = try_move_or_split("Down") },
+    { key = "k", mods = "LEADER", action = try_move_or_split("Up") },
+    { key = "l", mods = "LEADER", action = try_move_or_split("Right") },
     { key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
     { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
     { key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
