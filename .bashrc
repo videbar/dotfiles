@@ -20,9 +20,10 @@ HISTFILESIZE=3000
 # Disable software flow control (the terminal freezes when pressing ctrl-s).
 [ -t 0 ] && stty -ixon
 
-# Define a different .bashrc file only for the work computer.
-if [ -e "$HOME/.bashrc_work" ]; then
-    source $HOME/.bashrc_work 
+# .local_bashrc is used to define configuration options that I only need in a given
+# machine and I don't want in the git repository.
+if [ -e "$HOME/.local_bashrc" ]; then
+    source "$HOME/.local_bashrc"
 fi
 
 # User specific aliases and functions
@@ -34,7 +35,7 @@ alias f='find . -name'
 function bk(){
     cp "$1" "$1.orig";
 }
-# Go up multiple directories. More convinient than cp ../../../
+# Go up multiple directories. More convenient than cp ../../../
 function up(){
     # It can take multiple dots up .. = cp .., up ... = cp../.. and so on.
     if [[ "$1" =~ ^\.{2,}$ ]]; then
@@ -48,7 +49,7 @@ function up(){
         echo "$0": invalid argument, use either an integer or a set of dots, e.g, ... >&2
         (exit 1)
     fi
-    
+
     TARGET_PATH="$PWD"
 
     for (( i=1; i<=$PARENTS; i++ ))
@@ -123,7 +124,7 @@ else
 
     # Call my custom function
     VENV="\$(virtualenv_info)"
-    
+
     PS1=" \W\n${VENV}> "
 fi
 
