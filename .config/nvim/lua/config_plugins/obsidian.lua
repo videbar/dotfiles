@@ -17,6 +17,16 @@ obsidian.setup({
         -- Whether to add the output of the node_id_func to new notes in autocompletion.
         -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
         prepend_note_id = false,
+
+        -- Whether to add the note path during completion. E.g. "[[Foo" completes to
+        -- "[[notes/foo|Foo]]" assuming "notes/foo.md" is the path of the note. Mutually
+        -- exclusive with 'prepend_note_id' and 'use_path_only'.
+        prepend_note_path = false,
+
+        -- Whether to only use paths during completion. E.g. "[[Foo" completes to
+        -- "[[notes/foo]]" assuming "notes/foo.md" is the path of the note. Mutually
+        -- exclusive with 'prepend_note_id' and 'prepend_note_path'.
+        use_path_only = true,
     },
 
     -- Optional, key mappings.
