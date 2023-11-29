@@ -43,18 +43,25 @@ require("formatter").setup({
             end,
         },
         python = {
-            -- "formatter.filetypes.lua" defines default configurations for the "lua" filetype
+            -- "formatter.filetypes.lua" defines default configurations for the "lua"
+            -- filetype
             require("formatter.filetypes.python").black,
         },
         cpp = {
-            -- "formatter.filetypes.lua" defines default configurations for the "lua" filetype
-            require("formatter.filetypes.cpp").astyle,
+            -- "formatter.filetypes.cpp" defines default configurations for the "cpp"
+            -- filetype
+            require("formatter.filetypes.cpp").clangformat,
             function()
                 return {
-                    exe = "astyle",
+                    exe = "clang-format",
                     args = {
-                        "--style=attach",
-                        "--max-code-length=88",
+                        [[--style='{
+                            BasedOnStyle: Google,
+                            IndentWidth: 4,
+                            AlignAfterOpenBracket: BlockIndent,
+                            ColumnLimit: 88,
+                        }']],
+                        "-i",
                     },
                 }
             end,
