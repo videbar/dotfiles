@@ -1,70 +1,29 @@
-local lsp = require("lsp-zero")
-local cmp = require("cmp")
-local hints = require("lsp-inlayhints")
+local lsp = require("lspconfig")
+local builtin = require("telescope.builtin")
 
---
--- Lsp configuration.
---
+-- Remaps available to all files.
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>dl", builtin.diagnostics)
 
-lsp.preset({ name = "recommended", set_lsp_keymaps = true, manage_nvim_cmp = true })
+-- Configuration available to all files with an lsp server set up.
+local function default_on_attach(client, buffnr)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+    vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = 0 })
+    vim.keymap.set("n", "gT", builtin.lsp_type_definitions, { buffer = 0 })
+    vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+    vim.lsp.inlay_hint.enable()
+end
+lsp.pylsp.setup({ on_attach = default_on_attach })
+lsp.lua_ls.setup({ on_attach = default_on_attach })
+lsp.clangd.setup({ on_attach = default_on_attach })
+lsp.texlab.setup({ on_attach = default_on_attach })
+lsp.neocmake.setup({ on_attach = default_on_attach })
+lsp.rust_analyzer.setup({ on_attach = default_on_attach })
 
-lsp.ensure_installed({ "rust_analyzer", "pylsp", "lua_ls" })
-
-lsp.configure(
-    "pylsp",
-    { settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } } }
-)
-
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-    ["<S-Tab>"] = nil,
-})
-
--- Include parenthesis and similar delimiters when using autocomplete.
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-lsp.setup_nvim_cmp({ mapping = cmp_mappings })
-
--- Disable autocomplete in comments using cmp.
-local cmp_enabled = cmp.get_config().enabled
-local cmp_config = lsp.defaults.cmp_config({
-    enabled = function()
-        if
-            require("cmp.config.context").in_treesitter_capture("comment") == true
-            or require("cmp.config.context").in_syntax_group("Comment")
-        then
-            return false
-        else
-            return cmp_enabled()
-        end
-    end,
-})
-
--- Lsp keybindings
-lsp.on_attach(function(client, bufnr)
-    hints.on_attach(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
-
-    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = true })
-    vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-end)
-
--- Inlay hints
-hints.setup()
-cmp.setup(cmp_config)
-lsp.setup()
-
---
--- Diagnostics configuration.
---
-
--- Enable virtual text for diagnostics.
 vim.diagnostic.config({ virtual_text = true })
-
 -- Toggle virtual text with <leader>h.
 vim.g.diagnostics_visible = true
 vim.keymap.set("n", "<leader>h", function()
@@ -75,5 +34,8 @@ vim.keymap.set("n", "<leader>h", function()
         vim.diagnostic.enable()
         vim.g.diagnostics_visible = true
     end
-    hints.toggle()
+    -- Toggle the inlay hints.
+    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
 end)
+
+-- vim.lsp.buf.format()

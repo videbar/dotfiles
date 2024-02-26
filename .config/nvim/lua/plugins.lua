@@ -6,9 +6,11 @@ return require("packer").startup(function(use)
     -- Telescope
     use({
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.1",
-        -- or                          , branch = '0.1.x',
-        requires = { { "nvim-lua/plenary.nvim" } },
+        tag = "0.1.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
+        },
     })
 
     -- The Tokyo Night theme
@@ -23,27 +25,41 @@ return require("packer").startup(function(use)
     -- Undotree
     use("mbbill/undotree")
 
-    -- Language server protocol
+    -- Mason
     use({
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v1.x",
+        "williamboman/mason.nvim",
+    })
+
+    -- Lsp config
+    use({
+        "neovim/nvim-lspconfig",
+    })
+
+    use({
+        "hrsh7th/nvim-cmp",
+        -- Nvim-cmp sources.
         requires = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" }, -- Required
-            { "williamboman/mason.nvim" }, -- Optional
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" }, -- Required
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "hrsh7th/cmp-buffer" }, -- Optional
-            { "hrsh7th/cmp-path" }, -- Optional
-            { "saadparwaiz1/cmp_luasnip" }, -- Optional
-            { "hrsh7th/cmp-nvim-lua" }, -- Optional
-            -- Snippets
-            { "L3MON4D3/LuaSnip" }, -- Required
-            { "rafamadriz/friendly-snippets" }, -- Optional
-            -- Formatting
-            { "jose-elias-alvarez/null-ls.nvim" },
+            -- Autocomplete the current buffer
+            "hrsh7th/cmp-buffer",
+            -- Autocomplete paths.
+            "hrsh7th/cmp-path",
+            -- Autocomplete the nvim lua api.
+            "hrsh7th/cmp-nvim-lua",
+            -- Integrate with the nvim lsp client.
+            "hrsh7th/cmp-nvim-lsp",
+            -- Luansip sources
+            "saadparwaiz1/cmp_luasnip",
+        },
+    })
+
+    -- Snippets
+    use({
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        tag = "v2.*",
+        -- Use a pre-built snippet collection.
+        requires = {
+            "rafamadriz/friendly-snippets",
         },
     })
 
@@ -58,24 +74,10 @@ return require("packer").startup(function(use)
 
     -- Harpoon
     use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
-    -- Inlay hints
-    use("lvimuser/lsp-inlayhints.nvim")
 
     -- Comment
     use({
         "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
-    })
-
-    -- Toggleterm
-    use({
-        "akinsho/toggleterm.nvim",
-        tag = "*",
-        config = function()
-            require("toggleterm").setup()
-        end,
     })
 
     -- Lualine
@@ -101,4 +103,7 @@ return require("packer").startup(function(use)
 
     -- Formatter
     use({ "mhartington/formatter.nvim" })
+
+    -- Beter ai
+    use("echasnovski/mini.ai")
 end)

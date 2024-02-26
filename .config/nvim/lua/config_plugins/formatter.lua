@@ -55,12 +55,13 @@ require("formatter").setup({
                 return {
                     exe = "clang-format",
                     args = {
-                        [[--style='{
+                        [[--style="{
                             BasedOnStyle: Google,
                             IndentWidth: 4,
-                            AlignAfterOpenBracket: BlockIndent,
                             ColumnLimit: 88,
-                        }']],
+                            AlignAfterOpenBracket: Align,
+                            AlignTrailingComments: true
+                        }"]],
                         "-i",
                     },
                 }
