@@ -83,6 +83,10 @@ end
 config.leader = { key = "phys:Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
+
+    -- Paste from the clipboard
+    { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+
     { key = "phys:Space", mods = "LEADER", action = act.ActivateCommandPalette },
     -- Panes
     {

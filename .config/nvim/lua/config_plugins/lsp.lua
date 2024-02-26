@@ -22,6 +22,12 @@ lsp.clangd.setup({ on_attach = default_on_attach })
 lsp.texlab.setup({ on_attach = default_on_attach })
 lsp.neocmake.setup({ on_attach = default_on_attach })
 lsp.rust_analyzer.setup({ on_attach = default_on_attach })
+lsp.ltex.setup({
+    on_attach = default_on_attach,
+    -- Select the natural language automatically, e.g., Spanish. This results in ltex
+    -- not showing spelling suggestions, only grammar ones.
+    settings = { ltex = { language = "auto" } },
+})
 
 vim.diagnostic.config({ virtual_text = true })
 -- Toggle virtual text with <leader>h.

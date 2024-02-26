@@ -2,6 +2,10 @@ local obsidian = require("obsidian")
 
 obsidian.setup({
     dir = "$HOME/.obsidian/main",
+
+    ui = {
+        enable = false,
+    },
     -- Where to put new notes created from completion. Valid options are
     --  * "current_dir" - put new notes in same directory as the current buffer.
     --  * "notes_subdir" - put new notes in the default notes subdirectory.
