@@ -1,6 +1,8 @@
 add_newline = false
 command_timeout = 4000
 
+palette = "tokyonight_storm"
+
 format = """
 $username\
 $hostname\
@@ -14,29 +16,30 @@ $python\
 $character"""
 
 [directory]
-style = "#88c0d0"
+style = "blue"
 read_only = " "
+read_only_style = "red"
 
 [character]
-success_symbol = "[⮞](#88c0d0)"
-error_symbol = "[⮞](#bf616a)"
+success_symbol = "[▶](magenta)"
+error_symbol = "[▶](red)"
 
 [git_branch]
-format = "[$branch]($style)"
-style = "#5e81ac"
+format = "[$branch](comment)"
 
 [git_status]
-format = "[( $ahead_behind$stashed)]($style)"
-style = "#5e81ac"
+format = "[( $ahead_behind$stashed)](magenta)"
 stashed = "≡"
+ahead = "🠝"
+behind = "🠟"
+conflicted = "🠝🠟"
 
 [git_state]
-format = "[( $ahead_behind$stashed)]($style)"
-style = "#ebcb8b"
+format = '\([$state( $progress_current/$progress_total)](comment)\) '
+
 
 [python]
-format = "[($virtualenv )]($style)"
-style = "#a3be8c"
+format = "[($virtualenv )](comment)"
 
 # Custom script to check if the current directory is a clean git repository.
 [custom.git_clean]
@@ -68,5 +71,11 @@ fi
 # Otherwise, exit with 1.
 exit 1
 '''
-style = "218"
 shell = "bash"
+format = "[($output)](magenta)"
+
+[palettes.tokyonight_storm]
+magenta = "#bb9af7"
+red = "#db4b4b"
+comment = "#565f89"
+blue = "#2ac3de"

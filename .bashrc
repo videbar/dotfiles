@@ -141,7 +141,7 @@ fi
 
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
-    alias cat='bat --theme="Nord"'
+    alias cat='bat --theme="tokyonight_storm"'
 # Sometimes the executable is installed as batcat.
 elif [ "$(command -v batcat)" ]; then
     alias cat='batcat --theme="Nord"'
@@ -155,24 +155,24 @@ fi
 # Use rmtrash instead of rm and rmdirtrash instead of rmdir. Source:
 # https://github.com/PhrozenByte/rmtrash
 if [ "$(command -v rmtrash)"  ] && [ "$(command -v trash)"  ]; then
-    alias true-rm='rm'
+    alias true-rm='\rm'
     alias rm='rmtrash --forbid-root'
     alias sudo='sudo '
 fi
 
 if [ "$(command -v rmdirtrash)"  ] && [ "$(command -v trash)"  ]; then
-    alias true-rmdir='rmdir'
+    alias true-rmdir='\rmdir'
     alias rmdir='rmdirtrash --forbid-root'
     alias sudo='sudo '
 fi
 
 # Enable fzf keybdingings and theme
 if [ "$(command -v fzf)"  ]; then
-    export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-        --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
-        --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
-        --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
-        --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+        --color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+        --color=fg+:#c0caf5,bg+:#24283b,hl+:#ff9e64 \
+        --color=info:#7aa2f7,prompt:#7dcfff,pointer:#ff9e64 \
+        --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
     # Source the fzf keybindings. The exact location depends on the distribution.
     POTENTIAL_LOCATIONS=(

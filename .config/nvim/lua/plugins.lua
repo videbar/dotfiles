@@ -11,8 +11,8 @@ return require("packer").startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } },
     })
 
-    -- The Nord theme
-    use("shaunsingh/nord.nvim")
+    -- The Tokyo Night theme
+    use("folke/tokyonight.nvim")
 
     -- Treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

@@ -8,11 +8,12 @@ config.enable_tab_bar = false
 config.tab_bar_at_bottom = true
 config.font = wezterm.font("Fira Code")
 config.font_size = 11.0
-config.command_palette_fg_color = "#e5e9f0"
-config.command_palette_bg_color = "#434c5e"
-config.color_scheme = "nord"
+config.command_palette_fg_color = "#7dcfff"
+config.command_palette_bg_color = "#1f2335"
+config.color_scheme = "tokyonight_storm"
 config.default_workspace = "main"
 config.enable_wayland = false
+config.disable_default_key_bindings = true
 
 local function workspace_navigator()
     -- Returns a custom workspace navigator.
