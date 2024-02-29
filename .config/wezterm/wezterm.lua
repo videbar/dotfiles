@@ -83,6 +83,7 @@ end
 config.leader = { key = "phys:Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
+    { key = "c", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 
     -- Paste from the clipboard
     { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },

@@ -32,7 +32,7 @@ format = "[( $ahead_behind$stashed)](magenta)"
 stashed = "≡"
 ahead = "🠝"
 behind = "🠟"
-conflicted = "🠝🠟"
+diverged = "🠝🠟"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)](comment)\) '
