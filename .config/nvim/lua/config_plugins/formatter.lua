@@ -1,17 +1,16 @@
--- Utilities for creating configurations
-local util = require("formatter.util")
-
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup({
     -- Enable or disable logging
     logging = true,
     -- Set the log level
     log_level = vim.log.levels.WARN,
-    -- All formatter configurations are opt-in
+    -- All formatter configurations are opt-in.
     filetype = {
-        -- Formatter configurations for filetype "lua" go here and will be executed in order
+        -- Formatter configurations for filetype "lua" go here and will be executed in
+        -- order.
         lua = {
-            -- "formatter.filetypes.lua" defines default configurations for the "lua" filetype
+            -- "formatter.filetypes.lua" defines default configurations for the "lua"
+            -- filetype
             require("formatter.filetypes.lua").stylua,
 
             -- You can also define your own configuration
@@ -43,13 +42,13 @@ require("formatter").setup({
             end,
         },
         python = {
-            -- "formatter.filetypes.lua" defines default configurations for the "lua"
-            -- filetype
+            -- "formatter.filetypes.python" defines default configurations for the
+            -- "python" filetype.
             require("formatter.filetypes.python").black,
         },
         cpp = {
             -- "formatter.filetypes.cpp" defines default configurations for the "cpp"
-            -- filetype
+            -- filetype.
             require("formatter.filetypes.cpp").clangformat,
             function()
                 return {
@@ -69,18 +68,30 @@ require("formatter").setup({
         },
 
         -- Use the special "*" filetype for defining formatter configurations on any
-        -- filetype
+        -- filetype.
         ["*"] = {
-            -- "formatter.filetypes.any" defines default configurations for any filetype
             require("formatter.filetypes.any").remove_trailing_whitespace,
         },
     },
 })
 
-vim.keymap.set("n", "<leader>z", function()
-    print("control")
-    local cwd = vim.fn.getcwd()
-    local wd = cwd .. "**stylua.toml"
-    local config_files = vim.fn.glob(wd)
-    print(config_files)
-end)
+-- Autoformat on (after) save.
+vim.api.nvim_create_autocmd("BufWritePost", {
+    callback = function()
+        -- Check if a formatter was configured.
+        local formatters =
+            require("formatter.util").get_available_formatters_for_ft(vim.bo.filetype)
+        -- If no formatter is configured, try to use the LSP server instead.
+        if #formatters == 0 then
+            local lsp_servers = vim.lsp.buf_get_clients()
+            for _, server in pairs(lsp_servers) do
+                if server.server_capabilities.documentFormattingProvider then
+                    vim.lsp.buf.format()
+                    break
+                end
+            end
+        end
+        -- Either way, call `FormatWrite` so that the "any type" formatter is run.
+        vim.cmd("FormatWrite")
+    end,
+})
