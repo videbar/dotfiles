@@ -22,6 +22,7 @@ lsp.clangd.setup({ on_attach = default_on_attach })
 lsp.texlab.setup({ on_attach = default_on_attach })
 lsp.neocmake.setup({ on_attach = default_on_attach })
 lsp.rust_analyzer.setup({ on_attach = default_on_attach })
+lsp.taplo.setup({ on_attach = default_on_attach })
 lsp.ltex.setup({
     on_attach = default_on_attach,
     -- Select the natural language automatically, e.g., Spanish. This results in ltex
@@ -43,5 +44,3 @@ vim.keymap.set("n", "<leader>h", function()
     -- Toggle the inlay hints.
     vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
 end)
-
--- vim.lsp.buf.format()
