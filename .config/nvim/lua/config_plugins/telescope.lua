@@ -32,15 +32,21 @@ vim.keymap.set("n", "<leader>gtb", builtin.git_branches, {})
 -- Other useful remaps.
 vim.keymap.set(
     "n",
-    "<leader>fi",
+    "<leader>ff",
     builtin.current_buffer_fuzzy_find,
     { sorting_strategy = ascending, prompt_position = top }
 )
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>ch", builtin.command_history, {})
 
 -- Show spell check suggestions using telescope with <leader>sf (spell fix).
 vim.keymap.set("n", "<leader>sf", function()
-    builtin.spell_suggest(require("telescope.themes").get_cursor({}))
+    builtin.spell_suggest(require("telescope.themes").get_cursor({
+        attach_mappings = function(_, map)
+            map("i", "<C-y>", require("telescope.actions").select_default)
+            return true
+        end,
+    }))
 end, { desc = "Spelling Suggestions" })
 
 -- Setup remaps to change the language of the spellchecker.
