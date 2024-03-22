@@ -1,3 +1,4 @@
+-- Show a symbol on the line when format on save is enabled.
 require("lualine").setup({
     options = {
         icons_enabled = false,
@@ -32,7 +33,16 @@ require("lualine").setup({
                 },
             },
         },
-        lualine_x = { "fileformat", "filetype" },
+        lualine_x = {
+            function()
+                if vim.g.format_on_save then
+                    return "⋮🖫"
+                else
+                    return ""
+                end
+            end,
+            "filetype",
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },

@@ -76,22 +76,36 @@ require("formatter").setup({
 })
 
 -- Autoformat on (after) save.
+vim.g.format_on_save = true
+vim.api.nvim_create_user_command("DisableFormatOnSave", function()
+    vim.g.format_on_save = false
+end, {})
+vim.api.nvim_create_user_command("EnableFormatOnSave", function()
+    vim.g.format_on_save = true
+end, {})
+
 vim.api.nvim_create_autocmd("BufWritePost", {
     callback = function()
-        -- Check if a formatter was configured.
-        local formatters =
-            require("formatter.util").get_available_formatters_for_ft(vim.bo.filetype)
-        -- If no formatter is configured, try to use the LSP server instead.
-        if #formatters == 0 then
-            local lsp_servers = vim.lsp.buf_get_clients()
-            for _, server in pairs(lsp_servers) do
-                if server.server_capabilities.documentFormattingProvider then
-                    vim.lsp.buf.format()
-                    break
+        if vim.g.format_on_save then
+            -- Check if a formatter was configured.
+            local formatters =
+                require("formatter.util").get_available_formatters_for_ft(
+                    vim.bo.filetype
+                )
+            -- If no formatter is configured, try to use the LSP server instead.
+            if #formatters == 0 then
+                local lsp_servers = vim.lsp.buf_get_clients()
+                for _, server in pairs(lsp_servers) do
+                    if server.server_capabilities.documentFormattingProvider then
+                        vim.lsp.buf.format()
+                        break
+                    end
                 end
             end
+            -- Either way, call `FormatWrite` so that the "any type" formatter is run.
+            vim.cmd("FormatWrite")
         end
-        -- Either way, call `FormatWrite` so that the "any type" formatter is run.
-        vim.cmd("FormatWrite")
     end,
 })
+
+
