@@ -1,7 +1,13 @@
 local obsidian = require("obsidian")
 
 obsidian.setup({
-    dir = "$HOME/.obsidian/main",
+    -- A list of workspace names, paths, and configuration overrides.
+    -- If you use the Obsidian app, the 'path' of a workspace should generally be
+    -- your vault root (where the `.obsidian` folder is located).
+    -- When obsidian.nvim is loaded by your plugin manager, it will automatically set
+    -- the workspace to the first workspace in the list whose `path` is a parent of the
+    -- current markdown file being edited.
+    workspaces = { { name = "main", path = "$HOME/.obsidian/main" } },
 
     ui = {
         enable = false,
@@ -33,6 +39,17 @@ obsidian.setup({
         min_chars = 2,
     },
 
+    -- Either 'wiki' or 'markdown'.
+    preferred_link_style = "wiki",
+
+    picker = {
+        -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or
+        -- 'mini.pick'.
+        name = "telescope.nvim",
+        -- Optional, configure key mappings for the picker. These are the defaults.
+        -- Not all pickers support all mappings.
+    },
+    wikilink_func = "use_alias_only",
     -- Optional, key mappings.
     mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -80,6 +97,6 @@ vim.keymap.set("n", "<leader>on", function()
         end
     end)
 end)
-vim.keymap.set("n", "<leader>of", vim.cmd.ObsidianQuickSwitch)
-vim.keymap.set("n", "<leader>os", vim.cmd.ObsidianSearch)
-vim.keymap.set("n", "<leader>ob", vim.cmd.ObsidianBacklinks)
+vim.keymap.set("n", "<leader>fo", vim.cmd.ObsidianQuickSwitch)
+vim.keymap.set("n", "<leader>go", vim.cmd.ObsidianSearch)
+vim.keymap.set("n", "<leader>fbl", vim.cmd.ObsidianBacklinks)

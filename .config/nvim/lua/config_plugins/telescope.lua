@@ -10,13 +10,13 @@ telescope.setup({
 -- Use telescope to show things like code actions.
 telescope.load_extension("ui-select")
 
-vim.keymap.set("n", "<leader>pf", function()
+vim.keymap.set("n", "<leader>fp", function()
     builtin.find_files({
         hidden = true,
     })
 end, {})
 -- Use to find files that contain a string. Requires ripgrep.
-vim.keymap.set("n", "<leader>ps", function()
+vim.keymap.set("n", "<leader>gp", function()
     vim.ui.input({ prompt = "Grep > " }, function(input)
         if input ~= nil then
             builtin.grep_string({ search = input })
