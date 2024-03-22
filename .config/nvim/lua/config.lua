@@ -41,26 +41,18 @@ vim.opt.cursorline = true
 
 -- Keep current line always in the center. This is done using an autocmd instead of the
 -- scroll option to make it work at the bottom of the document.
-function Center_cursor()
-    local pos = vim.fn.getpos(".")
-    vim.cmd("normal! zz")
-    vim.fn.setpos(".", pos)
-end
-
-vim.cmd([[autocmd CursorMoved,CursorMovedI * lua Center_cursor()]])
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    callback = function()
+        local pos = vim.fn.getpos(".")
+        vim.cmd("normal! zz")
+        vim.fn.setpos(".", pos)
+    end,
+})
 
 -- Use treesitter for code folding.
 vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- Workaround to avoid a bug in telescope. It prevents a file that has been opened with
--- telescope from folding:
--- https://github.com/nvim-telescope/telescope.nvim/issues/699
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNew", "BufWinEnter" }, {
-    group = vim.api.nvim_create_augroup("ts_fold_workaround", { clear = true }),
-    command = "set foldexpr=nvim_treesitter#foldexpr()",
-})
 
 -- List of options: https://neovim.io/doc/user/change.html#fo-table
 vim.opt.formatoptions = "jql"
