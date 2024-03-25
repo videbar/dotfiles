@@ -57,10 +57,6 @@ return require("packer").startup(function(use)
         "L3MON4D3/LuaSnip",
         -- follow latest release.
         tag = "v2.*",
-        -- Use a pre-built snippet collection.
-        requires = {
-            "rafamadriz/friendly-snippets",
-        },
     })
 
     -- Obsidian
