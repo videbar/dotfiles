@@ -36,7 +36,28 @@ ls.add_snippets("python", {
     ls.parser.parse_snippet("for", "for $1 in $2:\n    $0"),
 })
 ls.add_snippets("markdown", { ls.parser.parse_snippet("cb", "```$1\n$0\n```") })
-ls.add_snippets(
-    "tex",
-    { ls.parser.parse_snippet("bg", "\\begin{$1}\n    $0\n\\end{$1} ") }
-)
+ls.add_snippets("tex", {
+    ls.parser.parse_snippet("bg", "\\begin{$1}\n    $0\n\\end{$1} "),
+    ls.parser.parse_snippet(
+        "eq",
+        "\\begin{equation}\n    $1\n    \\label{eq:$0}\n\\end{equation} "
+    ),
+    ls.parser.parse_snippet(
+        "fig",
+        "\\begin{figure}[$1]\n"
+            .. "    \\centering\n"
+            .. "    \\includegraphics[$2]{$3}\n"
+            .. "    \\caption{$4}\n"
+            .. "    \\label{fig:$0}\n"
+            .. "\\end{figure}"
+    ),
+    ls.parser.parse_snippet(
+        "vec",
+        "\\begin{figure}[$1]\n"
+            .. "    \\centering\n"
+            .. "    \\input{$2}\n"
+            .. "    \\caption{$3}\n"
+            .. "    \\label{fig:$0}\n"
+            .. "\\end{figure}"
+    ),
+})
