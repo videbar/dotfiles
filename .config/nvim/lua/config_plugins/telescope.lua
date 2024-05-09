@@ -48,16 +48,3 @@ vim.keymap.set("n", "<leader>sf", function()
         end,
     }))
 end, { desc = "Spelling Suggestions" })
-
--- Setup remaps to change the language of the spellchecker.
-vim.keymap.set("n", "<leader>sg", function()
-    vim.opt.spelllang = "en"
-    vim.opt.spell = true
-    print("Spell check set to English")
-end)
-
-vim.keymap.set("n", "<leader>se", function()
-    vim.opt.spelllang = "es"
-    vim.opt.spell = true
-    print("Spell check set to Spanish")
-end)

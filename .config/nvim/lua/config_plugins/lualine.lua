@@ -41,6 +41,13 @@ require("lualine").setup({
                     return ""
                 end
             end,
+            function()
+                if vim.opt.spell:get() then
+                    return vim.opt.spelllang:get()[1]
+                else
+                    return ""
+                end
+            end,
             "filetype",
         },
         lualine_y = { "progress" },

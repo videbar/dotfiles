@@ -28,9 +28,18 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<C-s>", function()
     if vim.opt.spell:get() then
         vim.opt.spell = false
-        print("Spell check off")
     else
         vim.opt.spell = true
-        print("Spell check on")
     end
+end)
+
+-- Setup remaps to change the language of the spellchecker.
+vim.keymap.set("n", "<leader>sg", function()
+    vim.opt.spelllang = "en"
+    vim.opt.spell = true
+end)
+
+vim.keymap.set("n", "<leader>se", function()
+    vim.opt.spelllang = "es"
+    vim.opt.spell = true
 end)
