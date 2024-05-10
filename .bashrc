@@ -20,6 +20,9 @@ HISTFILESIZE=3000
 # Disable software flow control (the terminal freezes when pressing ctrl-s).
 [ -t 0 ] && stty -ixon
 
+# Disable the option to close the shell with CTRL-d.
+set -o ignoreeof
+
 # .local_bashrc is used to define configuration options that I only need in a given
 # machine and I don't want in the git repository.
 if [ -e "$HOME/.local_bashrc" ]; then

@@ -16,10 +16,19 @@ local function default_on_attach(client, buffnr)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
     vim.lsp.inlay_hint.enable()
 end
+
 lsp.pylsp.setup({ on_attach = default_on_attach })
 lsp.lua_ls.setup({ on_attach = default_on_attach })
 lsp.clangd.setup({ on_attach = default_on_attach })
-lsp.texlab.setup({ on_attach = default_on_attach })
+lsp.texlab.setup({
+    on_attach = default_on_attach,
+    settings = {
+        texlab = {
+            inlayHints = { labelReferences = false },
+            build = { onSave = true },
+        },
+    },
+})
 lsp.neocmake.setup({ on_attach = default_on_attach })
 lsp.rust_analyzer.setup({ on_attach = default_on_attach })
 lsp.taplo.setup({ on_attach = default_on_attach })

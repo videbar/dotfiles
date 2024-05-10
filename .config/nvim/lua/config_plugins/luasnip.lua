@@ -1,5 +1,4 @@
 local ls = require("luasnip")
--- local types = require("luasnip.util.types")
 
 ls.config.set_config({
     updateevents = "TextChanged,TextChangedI",
@@ -21,10 +20,10 @@ ls.add_snippets("lua", { ls.parser.parse_snippet("fn", "function($1)\n    $0\nen
 ls.add_snippets("cpp", {
     ls.parser.parse_snippet("cout", "std::cout << $0 << std::endl;"),
     ls.parser.parse_snippet("cerr", "std::cerr << $0 << std::endl;"),
-    ls.parser.parse_snippet("if", "if ($1) {\n    $0\n}"),
-    ls.parser.parse_snippet("elif", "else if ($1) {\n    $0\n}"),
+    ls.parser.parse_snippet("if", "if ($1) {\n    $2\n} $0"),
+    ls.parser.parse_snippet("elif", "else if ($1) {\n    $0\n} $0"),
     ls.parser.parse_snippet("else", "else {\n    $0\n}"),
-    ls.parser.parse_snippet("for", "for (auto $1; $1 <= $2; $1++) {\n    $0\n}"),
+    ls.parser.parse_snippet("for", "for (auto $1 = $2; $1 <= $3; $1++) {\n    $0\n}"),
     ls.parser.parse_snippet(
         "main",
         "int main(int argc, char *argv[]) {\n    $0\n    return 0;\n}"

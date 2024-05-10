@@ -39,8 +39,8 @@ vim.opt.colorcolumn = "+1"
 -- Enable cursor line.
 vim.opt.cursorline = true
 
--- Keep current line always in the center. This is done using an autocmd instead of the
--- scroll option to make it work at the bottom of the document.
+-- Keep current line always in the centered. This is done using an autocmd instead of
+-- the scroll option to make it work at the bottom of the document.
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     callback = function()
         local pos = vim.fn.getpos(".")
@@ -48,6 +48,17 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
         vim.fn.setpos(".", pos)
     end,
 })
+
+-- These make the previous autocmd work with mouse scrolling.
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelUp>", function()
+    local _, _, ver_scroll = string.find(vim.opt.mousescroll:get()[1], "ver:(%d*)")
+    vim.cmd("normal! " .. ver_scroll .. "k")
+end)
+
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelDown>", function()
+    local _, _, ver_scroll = string.find(vim.opt.mousescroll:get()[1], "ver:(%d*)")
+    vim.cmd("normal! " .. ver_scroll .. "j")
+end)
 
 -- Use treesitter for code folding.
 vim.opt.foldlevel = 20
