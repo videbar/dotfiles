@@ -1,7 +1,10 @@
 local ls = require("luasnip")
 
 ls.config.set_config({
-    updateevents = "TextChanged,TextChangedI",
+    keep_roots = true,
+    link_roots = true,
+    link_children = true,
+    updateevents = { "TextChanged", "TextChangedI" },
 })
 
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
