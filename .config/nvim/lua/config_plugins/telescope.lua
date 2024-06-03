@@ -1,9 +1,41 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
+
+local custom_split_actions = require("telescope.actions.mt").transform_mod({
+    ver = function(prompt_bufnr)
+        actions.select_vertical(prompt_bufnr)
+        vim.cmd("wincmd L")
+    end,
+    hor = function(prompt_bufnr)
+        actions.select_horizontal(prompt_bufnr)
+        vim.cmd("wincmd J")
+    end,
+})
 
 telescope.setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-y>"] = actions.select_default,
+                ["<C-v>"] = custom_split_actions.ver,
+                ["<C-s>"] = custom_split_actions.hor,
+            },
+        },
+    },
     extensions = {
         ["ui-select"] = require("telescope.themes").get_dropdown({}),
+    },
+    pickers = {
+        spell_suggest = {
+            mappings = {
+                i = {
+                    ["<C-v>"] = false,
+                    ["<C-x>"] = false,
+                    ["<C-s>"] = false,
+                },
+            },
+        },
     },
 })
 
@@ -41,10 +73,5 @@ vim.keymap.set("n", "<leader>ch", builtin.command_history, {})
 
 -- Show spell check suggestions using telescope with <leader>sf (spell fix).
 vim.keymap.set("n", "<leader>sf", function()
-    builtin.spell_suggest(require("telescope.themes").get_cursor({
-        attach_mappings = function(_, map)
-            map("i", "<C-y>", require("telescope.actions").select_default)
-            return true
-        end,
-    }))
+    builtin.spell_suggest(require("telescope.themes").get_cursor({}))
 end, { desc = "Spelling Suggestions" })
