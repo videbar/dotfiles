@@ -20,6 +20,17 @@ end
 lsp.pylsp.setup({ on_attach = default_on_attach })
 lsp.lua_ls.setup({ on_attach = default_on_attach })
 lsp.clangd.setup({ on_attach = default_on_attach })
+lsp.matlab_ls.setup({
+    on_attach = default_on_attach,
+    settings = {
+        MATLAB = {
+            -- The lsp server expects matlab to be installed here. The installation
+            -- directory can be obtained using the matlab command `matlabroot`.
+            installPath = vim.env.HOME .. "/.matlab",
+            telemetry = false,
+        },
+    },
+})
 lsp.texlab.setup({
     on_attach = default_on_attach,
     settings = {
