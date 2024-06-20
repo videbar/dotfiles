@@ -22,10 +22,14 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Use <leader>s to replace the current word.
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set(
+    "n",
+    "<leader>rw",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
+)
 
--- Toggle spell check with <C-s>.
-vim.keymap.set("n", "<C-s>", function()
+-- Toggle spell check.
+vim.keymap.set("n", "<leader>ss", function()
     if vim.opt.spell:get() then
         vim.opt.spell = false
     else

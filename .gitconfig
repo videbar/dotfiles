@@ -6,7 +6,7 @@
 	email = pedro@vide.bar
 
 [core]
-	editor = vim
+	editor = nvim
 	pager = delta
 
 ; If present, load a local git config file that will overwrite the configuration. The
@@ -26,10 +26,10 @@
 
 ; Load custom themes.
 [include]
-    path = ~/.tokyonight_night.gitconfig
-    path = ~/.tokyonight_storm.gitconfig
-    path = ~/.tokyonight_moon.gitconfig
-    path = ~/.tokyonight_day.gitconfig
+    path = ~/.config/delta/themes/delta_tokyonight_night.gitconfig
+    path = ~/.config/delta/themes/delta_tokyonight_storm.gitconfig
+    path = ~/.config/delta/themes/delta_tokyonight_moon.gitconfig
+    path = ~/.config/delta/themes/delta_tokyonight_day.gitconfig
 
 [delta]
 	side-by-side = true

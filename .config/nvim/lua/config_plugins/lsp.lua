@@ -45,16 +45,9 @@ lsp.rust_analyzer.setup({ on_attach = default_on_attach })
 lsp.taplo.setup({ on_attach = default_on_attach })
 
 vim.diagnostic.config({ virtual_text = true })
+
 -- Toggle virtual text with <leader>h.
-vim.g.diagnostics_visible = true
 vim.keymap.set("n", "<leader>h", function()
-    if vim.g.diagnostics_visible then
-        vim.diagnostic.disable()
-        vim.g.diagnostics_visible = false
-    else
-        vim.diagnostic.enable()
-        vim.g.diagnostics_visible = true
-    end
-    -- Toggle the inlay hints.
-    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)

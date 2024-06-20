@@ -65,7 +65,7 @@ function up(){
 
 
 # Exports
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -76,7 +76,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source ~/.local/bin/virtualenvwrapper.sh
+source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Custom function to get virtualenv information for the command prompt
 function virtualenv_info(){
@@ -147,7 +147,7 @@ if [ "$(command -v bat)" ]; then
     alias cat='bat --theme="tokyonight_storm"'
 # Sometimes the executable is installed as batcat.
 elif [ "$(command -v batcat)" ]; then
-    alias cat='batcat --theme="Nord"'
+    alias cat='batcat --theme="tokyonight_storm"'
 fi
 
 # Use z for navigation
@@ -171,12 +171,8 @@ fi
 
 # Enable fzf keybdingings and theme
 if [ "$(command -v fzf)"  ]; then
-    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-        --color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
-        --color=fg+:#c0caf5,bg+:#24283b,hl+:#ff9e64 \
-        --color=info:#7aa2f7,prompt:#7dcfff,pointer:#ff9e64 \
-        --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
-
+    # Choose the color theme.
+    source $HOME/.config/fzf/themes/tokyonight_storm.sh
     # Source the fzf keybindings. The exact location depends on the distribution.
     POTENTIAL_LOCATIONS=(
         "/usr/share/doc/fzf/examples/key-bindings.bash"
@@ -192,7 +188,7 @@ if [ "$(command -v fzf)"  ]; then
     done
 
     # Some alias
-    alias fnvim='fzf --bind "enter:become(nvim {})"'
+    alias fv='fzf --bind "enter:become(nvim {})"'
     # Use vscodium if it's installed, and, if not, fallback to vscode.
     if [ "$(command -v codium)" ]; then
         alias fcode='fzf --bind "enter:become(codium {})"'
