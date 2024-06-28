@@ -98,4 +98,7 @@ return require("packer").startup(function(use)
 
     -- Beter ai
     use("echasnovski/mini.ai")
+
+    -- Smart splits
+    use("mrjones2014/smart-splits.nvim")
 end)

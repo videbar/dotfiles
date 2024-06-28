@@ -14,6 +14,10 @@ local function default_on_attach(client, buffnr)
     vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+    vim.keymap.set("i", "<C-h>", function()
+        vim.lsp.buf.signature_help()
+    end, opts)
+
     vim.lsp.inlay_hint.enable()
 end
 

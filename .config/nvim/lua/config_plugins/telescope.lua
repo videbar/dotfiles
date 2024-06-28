@@ -18,8 +18,7 @@ telescope.setup({
         mappings = {
             i = {
                 ["<C-y>"] = actions.select_default,
-                ["<C-v>"] = custom_split_actions.ver,
-                ["<C-s>"] = custom_split_actions.hor,
+                ["<C-s>"] = actions.select_horizontal,
             },
         },
     },

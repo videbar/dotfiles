@@ -74,3 +74,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.bo[args.buf].formatexpr = nil
     end,
 })
+
+vim.opt.splitbelow = true
+vim.opt.splitright = true

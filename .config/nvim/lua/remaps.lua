@@ -47,3 +47,17 @@ vim.keymap.set("n", "<leader>se", function()
     vim.opt.spelllang = "es"
     vim.opt.spell = true
 end)
+
+-- Window resizing.
+vim.keymap.set("n", "<M-l>", function()
+    vim.cmd("wincmd >")
+end)
+vim.keymap.set("n", "<M-h>", function()
+    vim.cmd("wincmd <")
+end)
+vim.keymap.set("n", "<M-j>", function()
+    vim.cmd("wincmd +")
+end)
+vim.keymap.set("n", "<M-k>", function()
+    vim.cmd("wincmd -")
+end)
