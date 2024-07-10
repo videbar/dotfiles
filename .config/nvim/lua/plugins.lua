@@ -26,15 +26,12 @@ return require("packer").startup(function(use)
     use("mbbill/undotree")
 
     -- Mason
-    use({
-        "williamboman/mason.nvim",
-    })
+    use("williamboman/mason.nvim")
 
     -- Lsp config
-    use({
-        "neovim/nvim-lspconfig",
-    })
+    use("neovim/nvim-lspconfig")
 
+    -- Cmp
     use({
         "hrsh7th/nvim-cmp",
         -- Nvim-cmp sources.
@@ -72,14 +69,10 @@ return require("packer").startup(function(use)
     use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
 
     -- Comment
-    use({
-        "numToStr/Comment.nvim",
-    })
+    use("numToStr/Comment.nvim")
 
     -- Lualine
-    use({
-        "nvim-lualine/lualine.nvim",
-    })
+    use("nvim-lualine/lualine.nvim")
 
     -- Autopairs
     use("windwp/nvim-autopairs")
@@ -94,11 +87,14 @@ return require("packer").startup(function(use)
     use("farmergreg/vim-lastplace")
 
     -- Formatter
-    use({ "mhartington/formatter.nvim" })
+    use("mhartington/formatter.nvim")
 
     -- Beter ai
     use("echasnovski/mini.ai")
 
     -- Smart splits
     use("mrjones2014/smart-splits.nvim")
+
+    -- Oil
+    use("stevearc/oil.nvim")
 end)
