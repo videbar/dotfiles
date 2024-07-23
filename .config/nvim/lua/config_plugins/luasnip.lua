@@ -21,20 +21,28 @@ end, { silent = true })
 
 local snippets_common_c_cpp = {
     ls.parser.parse_snippet("inc", "#include <$0>\n"),
+    ls.parser.parse_snippet("inl", '#include "$0"\n'),
+    ls.parser.parse_snippet("def", "#define $1 $0\n"),
+    ls.parser.parse_snippet("idf", "#ifdef $1\n    $2\n#endif"),
+    ls.parser.parse_snippet("indf", "#ifndef $1\n    $2\n#endif"),
     ls.parser.parse_snippet("if", "if ($1) {\n    $2\n} $0"),
     ls.parser.parse_snippet("elif", "else if ($1) {\n    $0\n} $0"),
     ls.parser.parse_snippet("else", "else {\n    $0\n}"),
-}
-local snippets_cpp = {
-    ls.parser.parse_snippet("cout", "std::cout << $0 << std::endl;"),
-    ls.parser.parse_snippet("cerr", "std::cerr << $0 << std::endl;"),
-    ls.parser.parse_snippet("for", "for (auto $1 = $2; $1 <= $3; $1++) {\n    $0\n}"),
+    ls.parser.parse_snippet("while", "while ($1) {\n    $0\n}"),
     ls.parser.parse_snippet(
         "main",
         "int main(int argc, char *argv[]) {\n    $0\n    return 0;\n}"
     ),
 }
-local snippets_c = {}
+local snippets_cpp = {
+    ls.parser.parse_snippet("cout", "std::cout << $0 << std::endl;"),
+    ls.parser.parse_snippet("cerr", "std::cerr << $0 << std::endl;"),
+    ls.parser.parse_snippet("for", "for (auto $1 = $2; $1 < $3; $1++) {\n    $0\n}"),
+}
+local snippets_c = {
+    ls.parser.parse_snippet("for", "for ($1; $2; $3) {\n    $0\n}"),
+    ls.parser.parse_snippet("tp", "typedef struct {\n    $1\n} $0;"),
+}
 
 ls.add_snippets("cpp", snippets_cpp)
 ls.add_snippets("cpp", snippets_common_c_cpp)
@@ -42,7 +50,7 @@ ls.add_snippets("c", snippets_c)
 ls.add_snippets("c", snippets_common_c_cpp)
 
 ls.add_snippets("lua", {
-    ls.parser.parse_snippet("fn", "function($1)\n    $0\nend"),
+    ls.parser.parse_snippet("af", "function($1)\n    $0\nend"),
     ls.parser.parse_snippet("lf", "local $1 = function($2)\n    $0\nend"),
     ls.parser.parse_snippet("fip", "for _, $1 in ipairs($2) do\n    $0\nend"),
     ls.parser.parse_snippet("fp", "for $1, $2 in pairs($3) do\n    $0\nend"),
