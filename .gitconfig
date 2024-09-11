@@ -26,10 +26,10 @@
 
 ; Load custom themes.
 [include]
-    path = ~/.config/delta/themes/delta_tokyonight_night.gitconfig
-    path = ~/.config/delta/themes/delta_tokyonight_storm.gitconfig
-    path = ~/.config/delta/themes/delta_tokyonight_moon.gitconfig
-    path = ~/.config/delta/themes/delta_tokyonight_day.gitconfig
+    path = ~/.config/delta/themes/tokyonight_night.gitconfig
+    path = ~/.config/delta/themes/tokyonight_storm.gitconfig
+    path = ~/.config/delta/themes/tokyonight_moon.gitconfig
+    path = ~/.config/delta/themes/tokyonight_day.gitconfig
 
 [delta]
 	side-by-side = true
