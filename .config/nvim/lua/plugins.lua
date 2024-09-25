@@ -66,7 +66,10 @@ return require("packer").startup(function(use)
     })
 
     -- Harpoon
-    use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
+    use({
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+    })
 
     -- Comment
     use("numToStr/Comment.nvim")

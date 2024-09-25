@@ -93,9 +93,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
                 require("formatter.util").get_available_formatters_for_ft(
                     vim.bo.filetype
                 )
-            -- If no formatter is configured, try to use the LSP server instead.
+            -- If no formatter is configured, try using the LSP server instead.
             if #formatters == 0 then
-                local lsp_servers = vim.lsp.buf_get_clients()
+                local lsp_servers = vim.lsp.get_clients({ bufnr = 0 })
                 for _, server in pairs(lsp_servers) do
                     if server.server_capabilities.documentFormattingProvider then
                         vim.lsp.buf.format({ timeout_ms = 2000 })

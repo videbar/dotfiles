@@ -21,7 +21,14 @@ local function default_on_attach(client, buffnr)
     vim.lsp.inlay_hint.enable()
 end
 
-lsp.pylsp.setup({ on_attach = default_on_attach })
+lsp.pylsp.setup({
+    settings = {
+        pylsp = {
+            plugins = { pycodestyle = { maxLineLength = vim.opt.textwidth:get() } },
+        },
+    },
+    on_attach = default_on_attach,
+})
 lsp.lua_ls.setup({ on_attach = default_on_attach })
 lsp.clangd.setup({ on_attach = default_on_attach })
 lsp.bashls.setup({ on_attach = default_on_attach })

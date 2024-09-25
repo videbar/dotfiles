@@ -35,17 +35,27 @@ telescope.setup({
                 },
             },
         },
+        help_tags = {
+            mappings = {
+                i = {
+                    ["<C-y>"] = actions.select_vertical,
+                    ["<CR>"] = actions.select_vertical,
+                },
+            },
+        },
     },
 })
 
 -- Use telescope to show things like code actions.
 telescope.load_extension("ui-select")
 
+-- Telescope remaps
 vim.keymap.set("n", "<leader>fp", function()
     builtin.find_files({
         hidden = true,
     })
 end, {})
+
 -- Use to find files that contain a string. Requires ripgrep.
 vim.keymap.set("n", "<leader>gp", function()
     vim.ui.input({ prompt = "Grep > " }, function(input)
@@ -55,12 +65,6 @@ vim.keymap.set("n", "<leader>gp", function()
     end)
 end)
 
--- Use telescope to integrate git.
-vim.keymap.set("n", "<leader>gts", builtin.git_status, {})
-vim.keymap.set("n", "<leader>gtl", builtin.git_commits, {})
-vim.keymap.set("n", "<leader>gtb", builtin.git_branches, {})
-
--- Other useful remaps.
 vim.keymap.set(
     "n",
     "<leader>ff",
@@ -74,3 +78,8 @@ vim.keymap.set("n", "<leader>ch", builtin.command_history, {})
 vim.keymap.set("n", "<leader>sf", function()
     builtin.spell_suggest(require("telescope.themes").get_cursor({}))
 end, { desc = "Spelling Suggestions" })
+
+-- Use telescope to integrate git.
+vim.keymap.set("n", "<leader>gts", builtin.git_status, {})
+vim.keymap.set("n", "<leader>gtl", builtin.git_commits, {})
+vim.keymap.set("n", "<leader>gtb", builtin.git_branches, {})

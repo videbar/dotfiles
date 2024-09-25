@@ -42,6 +42,7 @@ local snippets_cpp = {
 local snippets_c = {
     ls.parser.parse_snippet("for", "for ($1; $2; $3) {\n    $0\n}"),
     ls.parser.parse_snippet("tp", "typedef struct {\n    $1\n} $0;"),
+    ls.parser.parse_snippet("tn", "typedef enum {\n    $1\n} $0;"),
 }
 
 ls.add_snippets("cpp", snippets_cpp)
