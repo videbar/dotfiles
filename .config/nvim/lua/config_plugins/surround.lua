@@ -8,5 +8,27 @@ require("nvim-surround").setup({
             end,
             delete = "^(%[%[)().-(%]%])()$",
         },
+        -- Markdown link from the system clipboard, e.g., [link](https://www.link.com)
+        ["l"] = {
+            add = function()
+                local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                return {
+                    { "[" },
+                    { "](" .. clipboard .. ")" },
+                }
+            end,
+            find = "%b[]%b()",
+            delete = "^(%[)().-(%]%b())()$",
+            change = {
+                target = "^()()%b[]%((.-)()%)$",
+                replacement = function()
+                    local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                    return {
+                        { "" },
+                        { clipboard },
+                    }
+                end,
+            },
+        },
     },
 })
