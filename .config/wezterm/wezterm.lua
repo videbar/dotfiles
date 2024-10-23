@@ -180,4 +180,23 @@ config.key_tables = {
     },
 }
 
+-- If a local config file is available, let it overwrite these values.
+local function merge_configs(final_config, local_config)
+    for k, v in pairs(local_config) do
+        if (type(v) == "table") and (type(final_config[k] or false) == "table") then
+            merge_configs(final_config[k], local_config[k])
+        else
+            wezterm.log_info(string.format("Using %s from local config", k))
+            final_config[k] = v
+        end
+    end
+    return final_config
+end
+
+local local_available, local_config = pcall(require, "local_wezterm")
+if local_available and type(local_config) == "table" then
+    wezterm.log_info("Found local config")
+    merge_configs(config, local_config)
+end
+
 return config
