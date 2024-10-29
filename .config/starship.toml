@@ -1,7 +1,7 @@
 add_newline = false
 command_timeout = 4000
 
-palette = "tokyonight_storm"
+palette = "tokyonight_dark"
 
 format = """
 $username\
@@ -74,13 +74,9 @@ exit 1
 shell = "bash"
 format = "[($output)](magenta)"
 
-[palettes.tokyonight_storm]
-magenta = "#bb9af7"
-red = "#db4b4b"
-comment = "#565f89"
-blue = "#2ac3de"
 
-[palettes.tokyonight_night]
+# The colors are the same for the night and storm variants:
+[palettes.tokyonight_dark]
 magenta = "#bb9af7"
 red = "#db4b4b"
 comment = "#565f89"

@@ -20,6 +20,16 @@ local function default_on_attach(client, buffnr)
 
     vim.lsp.inlay_hint.enable()
 end
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = "rounded", max_width = 70 }
+    ),
+    ["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = "rounded", max_width = 70 }
+    ),
+}
 
 lsp.pylsp.setup({
     settings = {
@@ -27,12 +37,14 @@ lsp.pylsp.setup({
             plugins = { pycodestyle = { maxLineLength = vim.opt.textwidth:get() } },
         },
     },
+    handlers = handlers,
     on_attach = default_on_attach,
 })
-lsp.lua_ls.setup({ on_attach = default_on_attach })
-lsp.clangd.setup({ on_attach = default_on_attach })
-lsp.bashls.setup({ on_attach = default_on_attach })
+lsp.lua_ls.setup({ handlers = handlers, on_attach = default_on_attach })
+lsp.clangd.setup({ handlers = handlers, on_attach = default_on_attach })
+lsp.bashls.setup({ handlers = handlers, on_attach = default_on_attach })
 lsp.matlab_ls.setup({
+    handlers = handlers,
     on_attach = default_on_attach,
     settings = {
         MATLAB = {
@@ -44,6 +56,7 @@ lsp.matlab_ls.setup({
     },
 })
 lsp.texlab.setup({
+    handlers = handlers,
     on_attach = default_on_attach,
     settings = {
         texlab = {
@@ -52,9 +65,9 @@ lsp.texlab.setup({
         },
     },
 })
-lsp.neocmake.setup({ on_attach = default_on_attach })
-lsp.rust_analyzer.setup({ on_attach = default_on_attach })
-lsp.taplo.setup({ on_attach = default_on_attach })
+lsp.neocmake.setup({ handlers = handlers, on_attach = default_on_attach })
+lsp.rust_analyzer.setup({ handlers = handlers, on_attach = default_on_attach })
+lsp.taplo.setup({ handlers = handlers, on_attach = default_on_attach })
 
 vim.diagnostic.config({ virtual_text = true })
 

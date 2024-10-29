@@ -1,8 +1,10 @@
--- Show a symbol on the line when format on save is enabled.
+local tweaked_theme = require("lualine.themes.auto")
+tweaked_theme.normal.c.bg = require("tokyonight.colors.storm").bg
+
 require("lualine").setup({
     options = {
         icons_enabled = false,
-        theme = "auto",
+        theme = tweaked_theme,
         component_separators = { left = "|", right = "|" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = { statusline = {}, winbar = {} },

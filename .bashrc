@@ -144,10 +144,10 @@ fi
 
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
-    alias cat='bat --theme="tokyonight_storm"'
+    alias cat='bat --theme="tokyonight_night"'
 # Sometimes the executable is installed as batcat.
 elif [ "$(command -v batcat)" ]; then
-    alias cat='batcat --theme="tokyonight_storm"'
+    alias cat='batcat --theme="tokyonight_night"'
 fi
 
 # Use z for navigation
@@ -172,7 +172,7 @@ fi
 # Enable fzf keybdingings and theme
 if [ "$(command -v fzf)"  ]; then
     # Choose the color theme.
-    source $HOME/.config/fzf/themes/tokyonight_storm.sh
+    source $HOME/.config/fzf/themes/tokyonight_night.sh
     # Source the fzf keybindings. The exact location depends on the distribution.
     POTENTIAL_LOCATIONS=(
         "/usr/share/doc/fzf/examples/key-bindings.bash"
