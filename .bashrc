@@ -133,7 +133,7 @@ fi
 
 # Use exa instead of ls
 if [ "$(command -v exa)" ]; then
-    alias ls='exa -G  --color auto -s type'
+    alias ls='exa -G --color auto -s type'
     alias la='exa -a -G  --color auto -s type'
     alias ll='exa -l --color always -s type'
 else
@@ -144,10 +144,10 @@ fi
 
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
-    alias cat='bat --theme="tokyonight_night"'
+    alias cat='bat --theme="rose-pine"'
 # Sometimes the executable is installed as batcat.
 elif [ "$(command -v batcat)" ]; then
-    alias cat='batcat --theme="tokyonight_night"'
+    alias cat='batcat --theme="rose-pine"'
 fi
 
 # Use z for navigation
@@ -172,7 +172,7 @@ fi
 # Enable fzf keybdingings and theme
 if [ "$(command -v fzf)"  ]; then
     # Choose the color theme.
-    source $HOME/.config/fzf/themes/tokyonight_night.sh
+    source $HOME/.config/fzf/themes/rose-pine.sh
     # Source the fzf keybindings. The exact location depends on the distribution.
     POTENTIAL_LOCATIONS=(
         "/usr/share/doc/fzf/examples/key-bindings.bash"

@@ -20,6 +20,7 @@ local function default_on_attach(client, buffnr)
 
     vim.lsp.inlay_hint.enable()
 end
+
 local handlers = {
     ["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover,
@@ -69,7 +70,7 @@ lsp.neocmake.setup({ handlers = handlers, on_attach = default_on_attach })
 lsp.rust_analyzer.setup({ handlers = handlers, on_attach = default_on_attach })
 lsp.taplo.setup({ handlers = handlers, on_attach = default_on_attach })
 
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({ virtual_text = true, float={border="rounded"} })
 
 -- Toggle virtual text with <leader>h.
 vim.keymap.set("n", "<leader>h", function()

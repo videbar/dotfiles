@@ -1,7 +1,7 @@
 add_newline = false
 command_timeout = 4000
 
-palette = "tokyonight_dark"
+palette = "rose-pine"
 
 format = """
 $username\
@@ -81,3 +81,9 @@ magenta = "#bb9af7"
 red = "#db4b4b"
 comment = "#565f89"
 blue = "#2ac3de"
+
+[palettes.rose-pine]
+magenta = "#c4a7e7"
+red = "#eb6f92"
+comment = "#6e6a86"
+blue = "#9ccfd8"

@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 
+vim.api.nvim_set_hl(0, "CmpSelect", { bg = require("rose-pine.palette").highlight_med })
 cmp.setup({
     performance = { max_view_entries = 10 },
     snippet = {
@@ -8,8 +9,14 @@ cmp.setup({
         end,
     },
     window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,CursorLine:CmpSelect",
+        },
+        documentation = {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu",
+        },
     },
     mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -17,10 +24,7 @@ cmp.setup({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.close(),
-        ["<C-y>"] = cmp.mapping.confirm({
-            -- behavior = cmp.ConfirmBehavior.Select,
-            select = true,
-        }),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<C-S>"] = cmp.mapping.complete(),
     },
     sources = {
@@ -39,4 +43,3 @@ cmp.setup({
     experimental = { native_menu = false },
 })
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-

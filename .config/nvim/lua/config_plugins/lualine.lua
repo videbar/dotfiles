@@ -1,5 +1,10 @@
 local tweaked_theme = require("lualine.themes.auto")
-tweaked_theme.normal.c.bg = require("tokyonight.colors.storm").bg
+
+for _, v in pairs(tweaked_theme) do
+    v.c.bg = require("rose-pine.palette").highlight_low
+    -- Disable the bold text
+    v.a.gui = ""
+end
 
 require("lualine").setup({
     options = {
@@ -28,10 +33,10 @@ require("lualine").setup({
             {
                 "filename",
                 symbols = {
-                    modified = "●", -- Text to show when the file is modified.
-                    readonly = "🕮", -- Text to show when the file is non-modifiable or readonly.
-                    unnamed = "⦸", -- Text to show for unnamed buffers.
-                    newfile = "🞥", -- Text to show for newly created file before first write
+                    modified = "●",
+                    readonly = "🕮",
+                    unnamed = "⦸",
+                    newfile = "🞥",
                 },
             },
         },

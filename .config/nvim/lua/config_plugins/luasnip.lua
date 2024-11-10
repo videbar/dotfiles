@@ -26,8 +26,17 @@ local snippets_common_c_cpp = {
     ls.parser.parse_snippet("idf", "#ifdef $1\n    $2\n#endif"),
     ls.parser.parse_snippet("indf", "#ifndef $1\n    $2\n#endif"),
     ls.parser.parse_snippet("if", "if ($1) {\n    $2\n} $0"),
-    ls.parser.parse_snippet("elif", "else if ($1) {\n    $0\n} $0"),
+    ls.parser.parse_snippet("elif", "else if ($1) {\n    $2\n} $0"),
     ls.parser.parse_snippet("else", "else {\n    $0\n}"),
+    ls.parser.parse_snippet(
+        "swi",
+        "switch ($1) {\n"
+            .. "    case $2:\n"
+            .. "        $3\n"
+            .. "        break;\n"
+            .. "    $0}"
+    ),
+    ls.parser.parse_snippet("case", "case $1:\n    $2\n    break;\n$0"),
     ls.parser.parse_snippet("while", "while ($1) {\n    $0\n}"),
     ls.parser.parse_snippet(
         "main",
@@ -55,6 +64,9 @@ ls.add_snippets("lua", {
     ls.parser.parse_snippet("lf", "local $1 = function($2)\n    $0\nend"),
     ls.parser.parse_snippet("fip", "for _, $1 in ipairs($2) do\n    $0\nend"),
     ls.parser.parse_snippet("fp", "for $1, $2 in pairs($3) do\n    $0\nend"),
+    ls.parser.parse_snippet("if", "if $1 then\n    $0\nend"),
+    ls.parser.parse_snippet("elif", "elseif $1 then\n    $2\n$0"),
+    ls.parser.parse_snippet("else", "else\n    $1\n$0"),
 })
 
 ls.add_snippets("python", {

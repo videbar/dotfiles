@@ -30,7 +30,7 @@
 	line-numbers-left-format = ""
 	line-numbers-right-format = "│ "
     navigate = true
-	syntax-theme = tokyonight_night
+	syntax-theme = rose-pine
 
 ; If present, load a local git config file that will overwrite the configuration. The
 ; local config will not be committed to the repo. NOTE: environment variables are not

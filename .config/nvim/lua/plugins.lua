@@ -13,8 +13,8 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- The Tokyo Night theme
-    use("folke/tokyonight.nvim")
+    -- The Rosé pine theme
+    use("rose-pine/nvim")
 
     -- Treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
