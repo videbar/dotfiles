@@ -9,8 +9,14 @@ vim.keymap.set("n", "<leader>dl", builtin.diagnostics)
 -- Configuration available to all files with an lsp server set up.
 local function default_on_attach(client, buffnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-    vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = 0 })
-    vim.keymap.set("n", "gt", builtin.lsp_type_definitions, { buffer = 0 })
+    vim.keymap.set("n", "gD", builtin.lsp_definitions, { buffer = 0 })
+    vim.keymap.set("n", "gd", function()
+        builtin.lsp_definitions({ jump_type = "vsplit" })
+    end, { buffer = 0 })
+    vim.keymap.set("n", "gT", builtin.lsp_type_definitions, { buffer = 0 })
+    vim.keymap.set("n", "gt", function()
+        builtin.lsp_type_definitions({ jump_type = "vsplit" })
+    end, { buffer = 0 })
     vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
@@ -70,10 +76,12 @@ lsp.neocmake.setup({ handlers = handlers, on_attach = default_on_attach })
 lsp.rust_analyzer.setup({ handlers = handlers, on_attach = default_on_attach })
 lsp.taplo.setup({ handlers = handlers, on_attach = default_on_attach })
 
-vim.diagnostic.config({ virtual_text = true, float={border="rounded"} })
+vim.diagnostic.config({ virtual_text = true, float = { border = "rounded" } })
 
--- Toggle virtual text with <leader>h.
-vim.keymap.set("n", "<leader>h", function()
+-- Toggle diagnostics with <leader>h. Define ToggleAllDiagnostics as a global function
+-- so it can be called in other parts of the config.
+ToggleAllDiagnostics = function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end)
+end
+vim.keymap.set("n", "<leader>h", ToggleAllDiagnostics)

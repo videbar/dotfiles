@@ -1,6 +1,5 @@
 local cmp = require("cmp")
 
-vim.api.nvim_set_hl(0, "CmpSelect", { bg = require("rose-pine.palette").highlight_med })
 cmp.setup({
     performance = { max_view_entries = 10 },
     snippet = {
@@ -11,11 +10,10 @@ cmp.setup({
     window = {
         completion = {
             border = "rounded",
-            winhighlight = "Normal:Pmenu,CursorLine:CmpSelect",
+            winhighlight = "CursorLine:CmpSelect",
         },
         documentation = {
             border = "rounded",
-            winhighlight = "Normal:Pmenu",
         },
     },
     mapping = {
@@ -39,7 +37,7 @@ cmp.setup({
         -- need to be typed before showing a suggestion from this source.
         { name = "buffer", keyword_length = 5 },
     },
-
     experimental = { native_menu = false },
 })
+
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())

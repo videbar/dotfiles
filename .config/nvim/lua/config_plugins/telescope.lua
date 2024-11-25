@@ -57,7 +57,7 @@ vim.keymap.set("n", "<leader>fp", function()
 end, {})
 
 -- Use to find files that contain a string. Requires ripgrep.
-vim.keymap.set("n", "<leader>gp", function()
+vim.keymap.set("n", "<leader>gip", function()
     vim.ui.input({ prompt = "Grep > " }, function(input)
         if input ~= nil then
             builtin.grep_string({ search = input })

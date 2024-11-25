@@ -11,9 +11,19 @@ config.enable_tab_bar = false
 config.tab_bar_at_bottom = true
 config.font = wezterm.font("Fira Code")
 config.font_size = 11.0
-config.command_palette_fg_color = "#2ac3de"
-config.command_palette_bg_color = "#292e42"
-config.color_scheme = "rose-pine"
+
+-- Colors:
+config.color_scheme = "Catppuccin Mocha"
+config.colors = {
+    background = "#1a1a1a",
+    cursor_fg = "#000000",
+    selection_bg = "#45475a",
+    split = "#f2cdcd",
+    compose_cursor = "#b4befe",
+}
+config.command_palette_fg_color = "#a6adc8"
+config.command_palette_bg_color = "#313244"
+
 config.default_workspace = generate_new_workspace_name()
 config.enable_wayland = false
 config.disable_default_key_bindings = true

@@ -1,7 +1,7 @@
 add_newline = false
 command_timeout = 4000
 
-palette = "rose-pine"
+palette = "catppucine"
 
 format = """
 $username\
@@ -21,8 +21,8 @@ read_only = " "
 read_only_style = "red"
 
 [character]
-success_symbol = "[▶](magenta)"
-error_symbol = "[▶](red)"
+success_symbol = "[➜](bold magenta)"
+error_symbol = "[➜](bold red)"
 
 [git_branch]
 format = "[$branch](comment)"
@@ -87,3 +87,9 @@ magenta = "#c4a7e7"
 red = "#eb6f92"
 comment = "#6e6a86"
 blue = "#9ccfd8"
+
+[palettes.catppucine]
+magenta = "#f5c2e7"
+red = "#f38ba8"
+comment = "#9399b2"
+blue = "#89b4fa"

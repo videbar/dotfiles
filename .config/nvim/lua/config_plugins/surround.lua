@@ -32,3 +32,10 @@ require("nvim-surround").setup({
         },
     },
 })
+
+-- Highlight the yanked text using the same group as surround.nvim
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank({ higroup = "NvimSurroundHighlight", timeout = 250 })
+    end,
+})

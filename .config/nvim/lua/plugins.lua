@@ -13,14 +13,11 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- The Rosé pine theme
-    use("rose-pine/nvim")
+    -- The catppuccin theme
+    use({ "catppuccin/nvim", as = "catppuccin" })
 
     -- Treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-
-    -- Treesitter context
-    use("nvim-treesitter/nvim-treesitter-context")
 
     -- Undotree
     use("mbbill/undotree")
@@ -44,7 +41,7 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lua",
             -- Integrate with the nvim lsp client.
             "hrsh7th/cmp-nvim-lsp",
-            -- Luansip sources
+            -- Luansip sources.
             "saadparwaiz1/cmp_luasnip",
         },
     })
@@ -100,4 +97,7 @@ return require("packer").startup(function(use)
 
     -- Oil
     use("stevearc/oil.nvim")
+
+    -- Git signs
+    use("lewis6991/gitsigns.nvim")
 end)

@@ -7,6 +7,7 @@ vim.keymap.set("n", "<C-e>", function()
         border = "rounded",
         title_pos = "center",
         ui_max_width = 80,
+        winhighlight = "Normal:CmpWindow,CursorLine:CmpSelect",
     })
 end)
 vim.keymap.set("n", "<leader>ah", function()

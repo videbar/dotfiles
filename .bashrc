@@ -144,10 +144,10 @@ fi
 
 # Use bat instead of cat
 if [ "$(command -v bat)" ]; then
-    alias cat='bat --theme="rose-pine"'
+    alias cat='bat --theme="custom_catppuccin"'
 # Sometimes the executable is installed as batcat.
 elif [ "$(command -v batcat)" ]; then
-    alias cat='batcat --theme="rose-pine"'
+    alias cat='batcat --theme="custom_catppuccin"'
 fi
 
 # Use z for navigation
@@ -172,7 +172,7 @@ fi
 # Enable fzf keybdingings and theme
 if [ "$(command -v fzf)"  ]; then
     # Choose the color theme.
-    source $HOME/.config/fzf/themes/rose-pine.sh
+    source $HOME/.config/fzf/themes/custom_catppuccin.sh
     # Source the fzf keybindings. The exact location depends on the distribution.
     POTENTIAL_LOCATIONS=(
         "/usr/share/doc/fzf/examples/key-bindings.bash"

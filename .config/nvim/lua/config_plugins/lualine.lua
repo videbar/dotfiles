@@ -1,7 +1,6 @@
 local tweaked_theme = require("lualine.themes.auto")
 
 for _, v in pairs(tweaked_theme) do
-    v.c.bg = require("rose-pine.palette").highlight_low
     -- Disable the bold text
     v.a.gui = ""
 end
@@ -16,7 +15,7 @@ require("lualine").setup({
         ignore_focus = {},
         always_divide_middle = true,
         globalstatus = true,
-        refresh = { statusline = 1000, tabline = 1000, winbar = 1000 },
+        refresh = { statusline = 40, tabline = 40, winbar = 40 },
     },
     sections = {
         lualine_a = {
