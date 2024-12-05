@@ -1,17 +1,24 @@
-local obsidian = require("obsidian")
-
 local obsidian_path = vim.env.HOME .. "/.obsidian"
-local obsidian_dir = io.open(obsidian_path, "r")
-
-if obsidian_dir ~= nil then
-    io.close(obsidian_dir)
-    obsidian.setup({
-        -- A list of workspace names, paths, and configuration overrides.
-        -- If you use the Obsidian app, the 'path' of a workspace should generally be
-        -- your vault root (where the `.obsidian` folder is located).
-        -- When obsidian.nvim is loaded by your plugin manager, it will automatically set
-        -- the workspace to the first workspace in the list whose `path` is a parent of the
-        -- current markdown file being edited.
+return {
+    "epwalsh/obsidian.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    -- Only load this plugin if the vault folder exists.
+    enabled = function()
+        local vault = io.open(obsidian_path, "r")
+        if vault == nil then
+            return false
+        else
+            io.close(vault)
+            return true
+        end
+    end,
+    opts = {
+        -- A list of workspace names, paths, and configuration overrides. If you use the
+        -- Obsidian app, the 'path' of a workspace should generally be your vault root
+        -- (where the `.obsidian` folder is located). When obsidian.nvim is loaded by
+        -- your plugin manager, it will automatically set the workspace to the first
+        -- workspace in the list whose `path` is a parent of the current markdown file
+        -- being edited.
         workspaces = { { name = "main", path = obsidian_path .. "/main" } },
 
         ui = {
@@ -57,7 +64,8 @@ if obsidian_dir ~= nil then
         wikilink_func = "use_alias_only",
         -- Optional, key mappings.
         mappings = {
-            -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+            -- Overrides the 'gf' mapping to work on markdown/wiki links within your
+            -- vault.
             ["gf"] = {
                 action = function()
                     return require("obsidian").util.gf_passthrough()
@@ -78,7 +86,8 @@ if obsidian_dir ~= nil then
             end
         end,
 
-        -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
+        -- Optional, set to true to force ':ObsidianOpen' to bring the app to the
+        -- foreground.
         open_app_foreground = false,
 
         -- Optional, by default commands like `:ObsidianSearch` will attempt to use
@@ -89,20 +98,15 @@ if obsidian_dir ~= nil then
         -- remaining finders will be attempted in the original order.
         finder = "telescope.nvim",
 
-        -- Optional, determines whether to open notes in a horizontal split, a vertical split,
-        -- or replacing the current buffer (default)
-        -- Accepted values are "current", "hsplit" and "vsplit"
+        -- Optional, determines whether to open notes in a horizontal split, a vertical
+        -- split, or replacing the current buffer (default) Accepted values are
+        -- "current", "hsplit" and "vsplit"
         open_notes_in = "current",
-    })
-    -- Remap to add a new note, using `vim.ui.input` to ask the name.
-    vim.keymap.set("n", "<leader>on", function()
-        vim.ui.input({ prompt = "Note name > " }, function(input)
-            if input ~= nil then
-                vim.cmd("ObsidianNew " .. input)
-            end
-        end)
-    end)
-    vim.keymap.set("n", "<leader>fo", vim.cmd.ObsidianQuickSwitch)
-    vim.keymap.set("n", "<leader>go", vim.cmd.ObsidianSearch)
-    vim.keymap.set("n", "<leader>fbl", vim.cmd.ObsidianBacklinks)
-end
+    },
+    config = function(_, opts)
+        require("obsidian").setup(opts)
+        vim.keymap.set("n", "<leader>fo", vim.cmd.ObsidianQuickSwitch)
+        vim.keymap.set("n", "<leader>go", vim.cmd.ObsidianSearch)
+        vim.keymap.set("n", "<leader>fbl", vim.cmd.ObsidianBacklinks)
+    end,
+}
