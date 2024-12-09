@@ -85,12 +85,22 @@ return {
 
         vim.diagnostic.config({ virtual_text = true, float = { border = "rounded" } })
 
-        -- Toggle diagnostics with <leader>h. Define ToggleAllDiagnostics as a global
-        -- function so it can be called in other parts of the config.
-        ToggleAllDiagnostics = function()
+        -- Toggle diagnostics with <leader>h. This may include elements from different
+        -- plugins so I use a global list of functions that should be called. This list
+        -- can be modified in a plugin config to add the appropriate functions.
+        vim.keymap.set("n", "<leader>h", function()
+            for _, f in ipairs(vim.g.ToggleDiagnosticsFuncs) do
+                f()
+            end
+        end)
+        -- Global tables are not mutable.
+        local funcs = vim.g.ToggleDiagnosticsFuncs or {}
+        funcs[#funcs + 1] = function()
             vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+        end
+        funcs[#funcs + 1] = function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end
-        vim.keymap.set("n", "<leader>h", ToggleAllDiagnostics)
+        vim.g.ToggleDiagnosticsFuncs = funcs
     end,
 }
