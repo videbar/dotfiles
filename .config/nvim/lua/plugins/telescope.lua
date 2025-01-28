@@ -71,6 +71,7 @@ return {
         )
         vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
         vim.keymap.set("n", "<leader>ch", builtin.command_history, {})
+        vim.keymap.set("n", "<leader>lv", builtin.treesitter, {})
 
         -- Show spell check suggestions using telescope with <leader>sf (spell
         -- fix).

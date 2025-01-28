@@ -30,9 +30,9 @@ format = "[$branch](comment)"
 [git_status]
 format = "[( $ahead_behind$stashed)](magenta)"
 stashed = "≡"
-ahead = "🠝"
-behind = "🠟"
-diverged = "🠝🠟"
+ahead = "↑"
+behind = "↓"
+diverged = "↕"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)](comment)\) '

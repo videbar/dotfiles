@@ -177,6 +177,7 @@ if [ "$(command -v fzf)"  ]; then
     POTENTIAL_LOCATIONS=(
         "/usr/share/doc/fzf/examples/key-bindings.bash"
         "/usr/share/fzf/shell/key-bindings.bash"
+        ".local/share/fzf/key-bindings.bash"
     )
 
     for i in "${POTENTIAL_LOCATIONS[@]}"

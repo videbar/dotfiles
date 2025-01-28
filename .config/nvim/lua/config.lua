@@ -16,7 +16,7 @@ vim.opt.expandtab = true
 -- Disable swap files and use an undodir instead.
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = vim.env.HOME .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- Don't highlight all results after a search.
