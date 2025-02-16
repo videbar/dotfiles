@@ -58,3 +58,11 @@ end)
 vim.keymap.set("n", "<M-k>", function()
     vim.cmd("wincmd -")
 end)
+
+-- Remaps to comment/uncomment
+vim.keymap.set("n", "<C-n>", function()
+    vim.cmd.norm("1gcc")
+end)
+vim.keymap.set("v", "<C-n>", function()
+    vim.cmd.norm("gc")
+end)

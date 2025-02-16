@@ -109,5 +109,8 @@ return {
                     .. "\\end{figure}"
             ),
         })
+        ls.add_snippets("matlab", {
+            ls.parser.parse_snippet("for", "for $1=1:$2\n    $0\nend"),
+        })
     end,
 }

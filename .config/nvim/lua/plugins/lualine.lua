@@ -27,13 +27,23 @@ return {
                         end,
                     },
                 },
-                lualine_b = { "diagnostics" },
+                lualine_b = {
+                    {
+                        "diagnostics",
+                        symbols = {
+                            error = "● ",
+                            warn = "● ",
+                            info = "● ",
+                            hint = "● ",
+                        },
+                    },
+                },
                 lualine_c = {
                     "branch",
                     {
                         "filename",
                         symbols = {
-                            modified = "●",
+                            modified = "✱",
                             readonly = "🕮",
                             unnamed = "⦸",
                             newfile = "🞥",

@@ -59,6 +59,9 @@ return {
         lsp.matlab_ls.setup({
             handlers = handlers,
             on_attach = default_on_attach,
+            -- If this is not set, the lsp will not attach to any buffer unless the
+            -- files are in a git repository.
+            single_file_support = true,
             settings = {
                 MATLAB = {
                     -- The lsp server expects matlab to be installed here. The
@@ -83,7 +86,18 @@ return {
         lsp.rust_analyzer.setup({ handlers = handlers, on_attach = default_on_attach })
         lsp.taplo.setup({ handlers = handlers, on_attach = default_on_attach })
 
-        vim.diagnostic.config({ virtual_text = true, float = { border = "rounded" } })
+        vim.diagnostic.config({
+            virtual_text = true,
+            float = { border = "rounded" },
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "●",
+                    [vim.diagnostic.severity.WARN] = "●",
+                    [vim.diagnostic.severity.INFO] = "●",
+                    [vim.diagnostic.severity.HINT] = "●",
+                },
+            },
+        })
 
         -- Toggle diagnostics with <leader>h. This may include elements from different
         -- plugins so I use a global list of functions that should be called. This list
