@@ -9,11 +9,34 @@
 	editor = nvim
 	pager = delta
 
+[help]
+	autocorrect = prompt
+
 [alias]
 	graph = log --oneline --graph --decorate
 	ac = commit -am
 	slog = log --oneline -n 5
 	last = log -n 1
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	renames = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[commit]
+	verbose = true
+
+[column]
+	ui = auto
 
 [interactive]
 	diffFilter = delta --color-only

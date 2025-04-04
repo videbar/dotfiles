@@ -77,3 +77,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+-- Odd behaviour on zig source files.
+vim.g.zig_fmt_autosave = false

@@ -42,5 +42,9 @@ return {
         local normal_float_hl = vim.api.nvim_get_hl(0, { name = "NormalFloat" })
         normal_float_hl.bg = nil
         vim.api.nvim_set_hl(0, "NormalFloat", normal_float_hl)
+
+        local virtual_text_hl = vim.api.nvim_get_hl(0, { name = "LspInlayHint" })
+        virtual_text_hl.bg = nil
+        vim.api.nvim_set_hl(0, "LspInlayHint", virtual_text_hl)
     end,
 }

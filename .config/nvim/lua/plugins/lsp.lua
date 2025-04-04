@@ -4,15 +4,25 @@ return {
     config = function(_, opts)
         local lsp = require("lspconfig")
         local builtin = require("telescope.builtin")
+        -- Disable LSP snippets.
+        lsp.util.default_config.capabilities.textDocument.completion.completionItem.snippetSupport =
+            false
 
         -- Remaps available to all files.
-        vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
+        vim.keymap.set("n", "<leader>dn", function()
+            vim.diagnostic.jump({ count = 1, float = true })
+        end)
+        vim.keymap.set("n", "<leader>dp", function()
+            vim.diagnostic.jump({ count = -1, float = true })
+        end)
         vim.keymap.set("n", "<leader>dl", builtin.diagnostics)
 
         -- Configuration available to all files with an lsp server set up.
         local function default_on_attach(client, buffnr)
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+            vim.keymap.set("n", "K", function()
+                vim.lsp.buf.hover({ border = "rounded", max_width = 70 })
+            end, { buffer = 0 })
+
             vim.keymap.set("n", "gD", builtin.lsp_definitions, { buffer = 0 })
             vim.keymap.set("n", "gd", function()
                 builtin.lsp_definitions({ jump_type = "vsplit" })
@@ -25,22 +35,11 @@ return {
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
             vim.keymap.set("i", "<C-h>", function()
-                vim.lsp.buf.signature_help()
+                vim.lsp.buf.signature_help({ border = "rounded", max_width = 70 })
             end, opts)
 
             vim.lsp.inlay_hint.enable()
         end
-
-        local handlers = {
-            ["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover,
-                { border = "rounded", max_width = 70 }
-            ),
-            ["textDocument/signatureHelp"] = vim.lsp.with(
-                vim.lsp.handlers.signature_help,
-                { border = "rounded", max_width = 70 }
-            ),
-        }
 
         lsp.pylsp.setup({
             settings = {
@@ -50,14 +49,13 @@ return {
                     },
                 },
             },
-            handlers = handlers,
             on_attach = default_on_attach,
         })
-        lsp.lua_ls.setup({ handlers = handlers, on_attach = default_on_attach })
-        lsp.clangd.setup({ handlers = handlers, on_attach = default_on_attach })
-        lsp.bashls.setup({ handlers = handlers, on_attach = default_on_attach })
+        lsp.lua_ls.setup({ on_attach = default_on_attach })
+        lsp.clangd.setup({ on_attach = default_on_attach })
+        lsp.bashls.setup({ on_attach = default_on_attach })
+        lsp.zls.setup({ on_attach = default_on_attach })
         lsp.matlab_ls.setup({
-            handlers = handlers,
             on_attach = default_on_attach,
             -- If this is not set, the lsp will not attach to any buffer unless the
             -- files are in a git repository.
@@ -73,7 +71,6 @@ return {
             },
         })
         lsp.texlab.setup({
-            handlers = handlers,
             on_attach = default_on_attach,
             settings = {
                 texlab = {
@@ -82,9 +79,9 @@ return {
                 },
             },
         })
-        lsp.neocmake.setup({ handlers = handlers, on_attach = default_on_attach })
-        lsp.rust_analyzer.setup({ handlers = handlers, on_attach = default_on_attach })
-        lsp.taplo.setup({ handlers = handlers, on_attach = default_on_attach })
+        lsp.neocmake.setup({ on_attach = default_on_attach })
+        lsp.rust_analyzer.setup({ on_attach = default_on_attach })
+        lsp.taplo.setup({ on_attach = default_on_attach })
 
         vim.diagnostic.config({
             virtual_text = true,
