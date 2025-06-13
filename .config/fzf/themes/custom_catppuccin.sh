@@ -8,4 +8,5 @@ export FZF_DEFAULT_OPTS=" \
 --border rounded \
 --prompt '∷ ' \
 --pointer '>' \
+$FZF_DEFAULT_OPTS
 "

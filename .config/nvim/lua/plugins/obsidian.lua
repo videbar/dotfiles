@@ -61,7 +61,7 @@ return {
             -- Optional, configure key mappings for the picker. These are the defaults.
             -- Not all pickers support all mappings.
         },
-        wikilink_func = "use_alias_only",
+        wiki_link_func = "use_path_only",
         -- Optional, key mappings.
         mappings = {
             -- Overrides the 'gf' mapping to work on markdown/wiki links within your
@@ -79,12 +79,32 @@ return {
         -- Configure how to generate the filename from the note title.
         note_id_func = function(title)
             if title ~= nil then
-                -- If title is given, transform it into valid file name.
-                return title:gsub('[%*"\\/<>:|%?]', "")
+                return title:gsub('[%*"\\/<>:|%?]', ""):gsub(" ", "_"):lower()
             else
                 error("No valid name was given")
             end
         end,
+
+        attachments = {
+            -- The default folder to place images in via `:ObsidianPasteImg`. If this is
+            -- a relative path it will be interpreted as relative to the vault root.
+            img_folder = "attachments",
+
+            -- Customize the default name or prefix when pasting images via
+            -- `:ObsidianPasteImg`.
+            img_name_func = function()
+                -- Prefix image names with timestamp.
+                return string.format("%s-", os.time())
+            end,
+
+            -- A function that determines the text to insert in the note when pasting an
+            -- image. It takes two arguments, the `obsidian.Client` and an
+            -- `obsidian.Path` to the image file.
+            img_text_func = function(client, path)
+                path = client:vault_relative_path(path) or path
+                return string.format("[%s](%s)", path.name, path)
+            end,
+        },
 
         -- Optional, set to true to force ':ObsidianOpen' to bring the app to the
         -- foreground.
@@ -106,7 +126,18 @@ return {
     config = function(_, opts)
         require("obsidian").setup(opts)
         vim.keymap.set("n", "<leader>fo", vim.cmd.ObsidianQuickSwitch)
-        vim.keymap.set("n", "<leader>go", vim.cmd.ObsidianSearch)
-        vim.keymap.set("n", "<leader>fbl", vim.cmd.ObsidianBacklinks)
+        vim.keymap.set("n", "<leader>ol", vim.cmd.ObsidianBacklinks)
+        vim.keymap.set("n", "<leader>oo", vim.cmd.ObsidianOpen)
+        vim.keymap.set("n", "<leader>oi", vim.cmd.ObsidianPasteImg)
+
+        vim.keymap.set("n", "<leader>orn", function()
+            vim.ui.input({ prompt = "New name > " }, function(input)
+                if input ~= nil then
+                    vim.cmd.ObsidianRename(
+                        input:gsub('[%*"\\/<>:|%?]', ""):gsub(" ", "_"):lower()
+                    )
+                end
+            end)
+        end)
     end,
 }
