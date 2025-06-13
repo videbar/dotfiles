@@ -61,8 +61,12 @@ end)
 
 -- Remaps to comment/uncomment
 vim.keymap.set("n", "<C-n>", function()
-    vim.cmd.norm("1gcc")
+    if vim.bo.modifiable then
+        vim.cmd.norm("1gcc")
+    end
 end)
 vim.keymap.set("v", "<C-n>", function()
-    vim.cmd.norm("gc")
+    if vim.bo.modifiable then
+        vim.cmd.norm("gc")
+    end
 end)

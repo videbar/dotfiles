@@ -82,7 +82,10 @@ return {
             ls.parser.parse_snippet("for", "for $1 in $2:\n    $0"),
         })
 
-        ls.add_snippets("markdown", { ls.parser.parse_snippet("cb", "```$1\n$0\n```") })
+        ls.add_snippets("markdown", {
+            ls.parser.parse_snippet("cb", "```$1\n$0\n```"),
+            ls.parser.parse_snippet("cl", "- [ ] $0"),
+        })
 
         ls.add_snippets("tex", {
             ls.parser.parse_snippet("bg", "\\begin{$1}\n    $0\n\\end{$1} "),
