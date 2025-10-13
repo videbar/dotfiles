@@ -1,5 +1,5 @@
 -- Used to define a common configuration for c and cpp.
-local clang_format = function()
+local function clang_format()
     return {
         exe = "clang-format",
         args = {

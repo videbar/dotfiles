@@ -68,7 +68,7 @@ return {
 
         ls.add_snippets("lua", {
             ls.parser.parse_snippet("af", "function($1)\n    $0\nend"),
-            ls.parser.parse_snippet("lf", "local $1 = function($2)\n    $0\nend"),
+            ls.parser.parse_snippet("lf", "local function $1($2)\n    $0\nend"),
             ls.parser.parse_snippet("fip", "for _, $1 in ipairs($2) do\n    $0\nend"),
             ls.parser.parse_snippet("fp", "for $1, $2 in pairs($3) do\n    $0\nend"),
             ls.parser.parse_snippet("if", "if $1 then\n    $0\nend"),
@@ -114,6 +114,10 @@ return {
         })
         ls.add_snippets("matlab", {
             ls.parser.parse_snippet("for", "for $1=1:$2\n    $0\nend"),
+        })
+        ls.add_snippets("zig", {
+            ls.parser.parse_snippet("main", "pub fn main() !void {\n    $0\n}"),
+            ls.parser.parse_snippet("std", 'const std = @import("std");'),
         })
     end,
 }

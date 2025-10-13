@@ -73,8 +73,7 @@ return {
         vim.keymap.set("n", "<leader>ch", builtin.command_history, {})
         vim.keymap.set("n", "<leader>lv", builtin.treesitter, {})
 
-        -- Show spell check suggestions using telescope with <leader>sf (spell
-        -- fix).
+        -- Show spell check suggestions using telescope with <leader>sf (spell fix).
         vim.keymap.set("n", "<leader>sf", function()
             builtin.spell_suggest(require("telescope.themes").get_cursor({}))
         end, { desc = "Spelling Suggestions" })

@@ -15,6 +15,7 @@ return {
         "windwp/nvim-autopairs",
     },
     config = function(_, opts)
+        local cmp = require("cmp")
         -- Define the opts here, since they need to import the plugin.
         local my_opts = {
             performance = { max_view_entries = 10 },
@@ -33,13 +34,13 @@ return {
                 },
             },
             mapping = {
-                ["<C-p>"] = require("cmp").mapping.select_prev_item(),
-                ["<C-n>"] = require("cmp").mapping.select_next_item(),
-                ["<C-u>"] = require("cmp").mapping.scroll_docs(-4),
-                ["<C-d>"] = require("cmp").mapping.scroll_docs(4),
-                ["<C-e>"] = require("cmp").mapping.close(),
-                ["<C-y>"] = require("cmp").mapping.confirm({ select = true }),
-                ["<C-S>"] = require("cmp").mapping.complete(),
+                ["<C-p>"] = cmp.mapping.select_prev_item(),
+                ["<C-n>"] = cmp.mapping.select_next_item(),
+                ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                ["<C-e>"] = cmp.mapping.close(),
+                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<C-S>"] = cmp.mapping.complete(),
             },
             sources = {
                 -- Sources used by cmp to provide completion. The order in which they
@@ -56,8 +57,14 @@ return {
             },
             experimental = { native_menu = false },
         }
-        require("cmp").setup(vim.tbl_deep_extend("force", opts, my_opts))
-        require("cmp").event:on(
+        vim.keymap.set("i", "<C-n>", cmp.complete)
+        vim.keymap.set("i", "<C-p>", function()
+            cmp.complete()
+            cmp.select_prev_item()
+        end)
+
+        cmp.setup(vim.tbl_deep_extend("force", opts, my_opts))
+        cmp.event:on(
             "confirm_done",
             require("nvim-autopairs.completion.cmp").on_confirm_done()
         )
